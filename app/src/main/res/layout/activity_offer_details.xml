@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.main.ui.home.offerDetails.OfferDetailsViewModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.imageview.ShapeableImageView
+
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/sliderImg"
+            android:scaleType="fitXY"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:layout_margin="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:fontFamily="@font/cairo"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Desc"
+            android:layout_margin="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:fontFamily="@font/cairo"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="18sp"/>
+    </LinearLayout>
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/rounded_solid_prim"
+            android:fontFamily="@font/cairo"
+            android:text="نسخ كود الخصم"
+            android:textColor="#FFF"
+            android:onClick="@{() -> viewModel.onCopyClick()}"/>
+    </RelativeLayout>
+</layout>

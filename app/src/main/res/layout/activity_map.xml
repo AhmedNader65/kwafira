@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.map.MapActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.map.MapActivityViewModel" />
+
+    </data>
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start"
+    >
+
+    <include
+        android:id="@+id/content"
+         layout="@layout/content_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:viewModel="@{((com.almusand.kawfira.ui.map.MapActivityViewModel) viewModel)}"
+        />
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:background="@drawable/nave_rec"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        android:layout_marginTop="8dp"-->
+
+<!--        >-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/rec_menu_"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            >-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/rec_menu"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:background="@drawable/nave_bar"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                >-->
+
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/constraintLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="center"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/rec_menu">-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView9"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="24dp"-->
+<!--                    android:layout_marginEnd="24dp"-->
+<!--                    android:layout_marginRight="24dp"-->
+<!--                    android:text="@string/Home"-->
+<!--                    android:fontFamily="@font/cairo"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:gravity="start"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    android:background="@drawable/nave_txt"-->
+<!--                    android:paddingEnd="16dp"-->
+<!--                    android:onClick="Home"-->
+<!--                    />-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView10"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="Appoi"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/sche"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView11"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="Offers"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/offers"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView10" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView12"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="Complain"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/complain"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView11" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView123"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="Last"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/last"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView12" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView13"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="Contact"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/contact"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView123" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView14"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:layout_marginBottom="64dp"-->
+<!--                android:text="@string/logout"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:gravity="end"-->
+<!--                android:paddingEnd="8dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                android:onClick="Logout"-->
+<!--                />-->
+
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView4"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_marginEnd="32dp"-->
+<!--                android:layout_marginRight="32dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/textView14"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/textView14"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/textView14"-->
+<!--                app:srcCompat="@drawable/logout" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView15"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="24dp"-->
+<!--                android:layout_marginRight="24dp"-->
+<!--                android:fontFamily="@font/cairo"-->
+<!--                android:gravity="start"-->
+<!--                android:onClick="About"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:text="@string/about"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView13" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+<!--    </com.google.android.material.navigation.NavigationView>-->
+
+
+<!--    <com.shreyaspatil.material.navigationview.MaterialNavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        app:itemStyle="rounded_right"-->
+<!--        android:layoutDirection="rtl"-->
+<!--        app:headerLayout="@layout/nav_header_main"-->
+<!--        app:menu="@menu/main" />-->
+</androidx.drawerlayout.widget.DrawerLayout>
+</layout>

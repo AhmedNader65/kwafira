@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "404164891145",
+    "firebase_url": "https://kwafir-34e80.firebaseio.com",
+    "project_id": "kwafir-34e80",
+    "storage_bucket": "kwafir-34e80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404164891145:android:12423266b6a20a13b75ed8",
+        "android_client_info": {
+          "package_name": "com.almusand.kawfira"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404164891145-oitt11qki04nhbm8assbl788b4t2jbe7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFE8D11s7CnPik7kvJsMXW4fVdgpmSDHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404164891145-oitt11qki04nhbm8assbl788b4t2jbe7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

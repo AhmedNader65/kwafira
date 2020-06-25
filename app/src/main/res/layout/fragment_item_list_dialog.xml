@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+    <LinearLayout android:visibility="visible"
+        android:id="@+id/userChoice_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_top"
+        android:orientation="vertical"
+        android:paddingTop="14dp">
+
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="#999" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:layout_gravity="right"
+            android:src="@drawable/sic_icon"
+            android:fontFamily="@font/cairo"
+            android:textColor="#FFF" />
+        <TextView
+            android:paddingTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/cairo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimary"
+            android:text="الكوفيرة في الطريق سيدتي" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/cairo"
+            android:text="برجاء العلم في حالة الغاء الحجز بعد مضي دقيقتين، سيتم خصم مبلغ ١٥ ريال" />
+
+
+        <Button
+            android:id="@+id/confirm_selection"
+            android:layout_width="match_parent"
+            android:layout_margin="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/cairo"
+            android:textSize="22sp"
+            android:layout_marginRight="10dp"
+            android:text="الغاء الحجز"
+            android:textColor="#FFF" />
+    </LinearLayout>
+
+</layout>

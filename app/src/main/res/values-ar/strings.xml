@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">كوفيرة</string>
+    <string name="Home">الرئيسية</string>
+    <string name="sche">المواعيد المجدولة</string>
+    <string name="offers">عروض كوفيرة</string>
+    <string name="complain">الشكاوي والمقترحات</string>
+    <string name="last"> الطلبات المقترحة </string>
+    <string name="contact">تواصل معنا</string>
+    <string name="about">عن كوفيرة</string>
+    <string name="logout">تسجيل الخروج</string>
+</resources>

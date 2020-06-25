@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.kwafiraReviewProfile.KwafiraRevViewModel" />
+    </data>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:layout_margin="20dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/userPic"
+            android:src="@drawable/userphoto"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="فاطمة محمد علي"
+            android:layout_below="@+id/userPic"
+            android:id="@+id/username"
+            android:layout_centerHorizontal="true"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"/>
+        <RatingBar
+            android:id="@+id/listitemrating"
+            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:rating="4"
+            android:max="5"
+            android:progressTint="@color/colorPrimary"
+            android:layoutDirection="rtl"
+            android:layout_below="@id/username"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rateText"
+            android:textColor="@color/colorPrimary"
+            android:text="4.5"
+            android:fontFamily="@font/cairo"
+            android:textSize="22sp"
+            android:layout_below="@id/listitemrating"
+            android:layout_centerHorizontal="true"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/reviews"
+            android:layout_below="@id/rateText"
+            />
+    </RelativeLayout>
+</layout>

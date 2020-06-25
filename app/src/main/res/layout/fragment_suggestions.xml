@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.main.ui.suggestions.SuggestionsViewModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:padding="8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الشكاوي"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="والمقترحات"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/cairo"
+            android:textSize="25sp"/>
+
+        <EditText
+
+            android:background="@drawable/rounded_solid_grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_margin="15dp"
+            android:gravity="top|right"
+            android:minLines="5"
+
+            android:hint="ملاحظاتك ومقترحاتك"
+            />
+        <LinearLayout
+            android:background="@drawable/grey_dashed_rounded"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_margin="22dp"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/addDocument1"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_add_circle"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:layout_height="wrap_content"
+                    android:text="أضف مستند"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/grey_dashed_rounded"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_margin="22dp"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/addDocument2"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_add_circle"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:layout_height="wrap_content"
+                    android:text="أضف مستند"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/grey_dashed_rounded"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_margin="22dp"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/addDocument3"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_add_circle"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:layout_height="wrap_content"
+                    android:text="أضف مستند"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="32dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/cairo"
+            android:text="إرسال"
+            android:textColor="#FFF"/>
+    </LinearLayout>
+    </ScrollView>
+</layout>

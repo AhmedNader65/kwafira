@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">kawfira</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="Home">Home</string>
+    <string name="sche">Scheduled appointments</string>
+    <string name="offers">Offers as abundant</string>
+    <string name="complain">Complaints and suggestions</string>
+    <string name="last">Last Request </string>
+    <string name="contact">Contact Us</string>
+    <string name="about">About</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="invalid_email_password">برجاء التأكد من صحة البيانات</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_appointments">Appointments</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_suggestions">Suggestions</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="permission_required_toast">اذونات الموقع مطلوبة لهذا التطبيق</string>
+    <string name="location_permission_denied">اذونات الموقع مطلوبة لتحديد مكانك واقرب الكوفيرات</string>
+    <string name="permission_rationale_location">اذونات الموقع مطلوبة ليعمل التطبيق بشكل سليم</string>
+    <string name="default_time">اختر الوقت المناسب</string>
+    <string name="default_date">اختر اليوم المناسب</string>
+    <string name="choose_date">برجاء اختيار اليوم المناسب</string>
+    <string name="choose_time">برجاء ادخال التوقيت المناسب</string>
+    <string name="menu_orders">Orders</string>
+    <string name="permission_read_external_storage">السماح بالوصول للذاكرة لاختيار صورة الملف الشخصي</string>
+    <string name="title_activity_delete">DeleteActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+</resources>
