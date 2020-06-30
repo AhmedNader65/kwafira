@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetroWeb {
 
@@ -44,7 +45,7 @@ public class RetroWeb {
                     .client(okHttpClient)
                     .baseUrl("https://kwfiruh.com/api/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
-
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .build();
         }
         return retrofit;

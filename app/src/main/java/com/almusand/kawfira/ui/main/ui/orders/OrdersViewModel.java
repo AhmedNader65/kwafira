@@ -26,16 +26,14 @@ public class OrdersViewModel extends BaseViewModel {
     }
 
 
-    public void initOrders(String auth){
-        RetroWeb.getClient().create(ServiceApi.class).onGetOrders("Bearer "+auth).enqueue(new Callback<OrdersResModel>() {
+    public void initOrders(String auth,String status){
+        RetroWeb.getClient().create(ServiceApi.class).onGetOrders(status,"Bearer "+auth).enqueue(new Callback<OrdersResModel>() {
             @Override
             public void onResponse(Call<OrdersResModel> call, Response<OrdersResModel> response) {
                 if (response.isSuccessful()) {
                     OrdersResModel model = response.body();
                     List<OrderModel> modelList = model.getOrders();
                     resLiveData.setValue(modelList);
-                    Log.e("orders",response.body().toString()+"");
-                    Log.e("orders",modelList.size()+"");
                     setIsLoading(false);
 
                 } else {

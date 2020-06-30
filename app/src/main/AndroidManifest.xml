@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.almusand.kawfira">
+    package="com.almusand.kawfira" >
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -20,11 +21,14 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl" >
         <activity
-            android:name=".ui.DeleteActivity"
-            android:label="@string/title_activity_delete"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".kwafira.home.KwafiraMainActivity"
+            android:label="@string/title_activity_kwafira_main"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".kwafira.reviewing.ReviewingActivity" />
+        <activity android:name=".kwafira.identity.VerifyIdActivity" />
         <activity
             android:name=".ui.main.ui.editingActivities.name.ChangeNameAndImgActivity"
             android:theme="@style/MyApp" />
@@ -65,7 +69,9 @@
         <activity
             android:name=".ui.register.RegisterActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Screens.Splash">
+        <activity
+            android:name=".Screens.Splash"
+            android:theme="@style/splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -75,7 +81,7 @@
 
         <service
             android:name=".WebServices.MyFirebaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

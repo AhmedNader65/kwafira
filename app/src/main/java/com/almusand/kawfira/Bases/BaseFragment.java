@@ -1,5 +1,6 @@
 package com.almusand.kawfira.Bases;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -12,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.almusand.kawfira.utils.CommonUtils;
+
 /**
  * Created by amitshekhar on 09/07/17.
  */
@@ -22,6 +25,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     private View mRootView;
     private T mViewDataBinding;
     private V mViewModel;
+    private ProgressDialog mProgressDialog;
 
     /**
      * Override for set binding variable
@@ -107,6 +111,17 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
     }
 
 
+
+    public void showLoading() {
+        hideLoading();
+        mProgressDialog = CommonUtils.showLoadingDialog(getContext());
+    }
+
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
+    }
     public interface Callback {
 
         void onFragmentAttached();

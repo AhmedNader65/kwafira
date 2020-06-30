@@ -9,7 +9,6 @@ public interface RegisterNavigator {
 
     void register();
 
-    void openMainActivity(LoginModel model);
     void showToast(String msg);
 
     void openVerifyActivity(User user);

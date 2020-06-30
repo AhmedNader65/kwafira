@@ -24,9 +24,7 @@ import java.util.List;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class ChangeEmailActivity extends BaseActivity<ActivityChangeEmailBinding, ChangeEmailViewModel>
-        implements EasyPermissions.PermissionCallbacks, ChangeEmailNavigator {
-    private static final int PICKFILE_RESULT_CODE = 3;
-    private static final int EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 4;
+        implements  ChangeEmailNavigator {
     ActivityChangeEmailBinding binding;
     ChangeEmailViewModel viewModel;
     private Uri fileUri;
@@ -68,28 +66,6 @@ public class ChangeEmailActivity extends BaseActivity<ActivityChangeEmailBinding
 
     }
 
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // Forward results to EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-
-        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
-        chooseFile.setType("image/*");
-        chooseFile = Intent.createChooser(chooseFile, "Choose a file");
-        startActivityForResult(chooseFile, PICKFILE_RESULT_CODE);
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-
-    }
 
     @Override
     public void showToast(String msg) {

@@ -14,16 +14,18 @@ import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ActivityVerificationBinding;
+import com.almusand.kawfira.kwafira.identity.VerifyIdActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.resetPassword.reset.ResetPasswordActivity;
 import com.almusand.kawfira.utils.CommonUtils;
+import com.almusand.kawfira.utils.GlobalPreferences;
 
-public class VerificationActivity extends BaseActivity<ActivityVerificationBinding,VerificationViewModel> implements VerificationNavigator {
+public class VerificationActivity extends BaseActivity<ActivityVerificationBinding, VerificationViewModel> implements VerificationNavigator {
 
     User user;
     ActivityVerificationBinding binding;
     VerificationViewModel viewModel;
-
+    GlobalPreferences gp;
     boolean isReset = false;
     private String phone;
 
@@ -46,15 +48,18 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try{
-           isReset= getIntent().getBooleanExtra("reset",false);
-        }catch (Exception e){};
+        gp = new GlobalPreferences(this);
+        try {
+            isReset = getIntent().getBooleanExtra("reset", false);
+        } catch (Exception e) {
+        }
+        ;
 
         user = (User) getIntent().getSerializableExtra("user");
         binding = getViewDataBinding();
         viewModel.setNavigator(this);
-        phone = getIntent().getStringExtra("phone");
-            binding.textView4.setText(phone);
+        phone = user.getPhone();
+        binding.textView4.setText(phone);
 
 
     }
@@ -72,7 +77,7 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void verify(String code) {
-        viewModel.whichToLoad(code,isReset);
+        viewModel.whichToLoad(code, isReset);
     }
 
     @Override
@@ -95,13 +100,29 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
         binding.timer.setVisibility(View.VISIBLE);
         binding.resendBtn.setBackgroundResource(R.drawable.rounded_solid_grey);
         binding.resendBtn.setEnabled(false);
-        CommonUtils.countDownTimer(binding.timer, 60000,binding.resendBtn);
+        CommonUtils.countDownTimer(binding.timer, 60000, binding.resendBtn);
     }
 
     @Override
     public void openMainActivity(LoginModel model) {
-        Intent intent = HomeActivity.newIntent(VerificationActivity.this)
-                .putExtra("user",user);
+        gp.storeUserInfo(model.getResponse(), model.getAccess_token());
+        Intent intent;
+        intent = HomeActivity.newIntent(VerificationActivity.this)
+                .putExtra("user", model.getResponse());
+
+
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void openVerifyIdActivity(LoginModel model) {
+        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
+        (new GlobalPreferences(this)).storeLogged(true);
+        gp.storeUserInfo(model.getResponse(), model.getAccess_token());
+        Intent intent;
+        intent = VerifyIdActivity.newIntent(VerificationActivity.this)
+                .putExtra("user", model.getResponse());
         startActivity(intent);
         finish();
     }
@@ -109,13 +130,13 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
     @Override
     public void openResetActivity(String code) {
         Intent intent = ResetPasswordActivity.newIntent(VerificationActivity.this)
-                .putExtra("code",code);
+                .putExtra("code", code);
         startActivity(intent);
     }
 
     @Override
     public void SendVerifyRequest(String code) {
-        viewModel.sendVerify(code,user.getToken());
+        viewModel.sendVerify(code, user.getToken());
 
     }
 }

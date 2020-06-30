@@ -18,4 +18,6 @@ public interface VerificationNavigator {
     void openResetActivity(String code);
 
     void SendVerifyRequest(String code);
+
+    void openVerifyIdActivity(LoginModel model);
 }

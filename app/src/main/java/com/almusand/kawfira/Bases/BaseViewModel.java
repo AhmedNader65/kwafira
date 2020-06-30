@@ -20,6 +20,7 @@ public abstract class BaseViewModel<N> extends ViewModel {
     private CompositeDisposable mCompositeDisposable;
 
     private WeakReference<N> mNavigator;
+    private WeakReference<N> mNavigator2;
 
 //    public BaseViewModel(DataManager dataManager,
 //                         SchedulerProvider schedulerProvider) {
@@ -52,9 +53,15 @@ public abstract class BaseViewModel<N> extends ViewModel {
     public N getNavigator() {
         return mNavigator.get();
     }
+    public N getNavigator2() {
+        return mNavigator2.get();
+    }
 
     public void setNavigator(N navigator) {
         this.mNavigator = new WeakReference<>(navigator);
+    }
+    public void setNavigator2(N navigator) {
+        this.mNavigator2 = new WeakReference<>(navigator);
     }
 
 

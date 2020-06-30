@@ -14,4 +14,12 @@ public interface LoginNavigator {
     void openMainActivity(LoginModel model);
 
     void forget();
+
+    void registerKwafira();
+
+    void openVerifyIdForKwafira(LoginModel user);
+
+    void openUnderReviewActivity(LoginModel model);
+
+    void openMainActivityForKwafira(LoginModel model);
 }

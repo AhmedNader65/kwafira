@@ -36,14 +36,14 @@ public class User implements Serializable {
     @Expose
     private String balance;
 
-    @SerializedName("work_method")
-    @Expose
-    private String work_method;
-
 
     @SerializedName("verified")
     @Expose
     private String verified;
+
+    @SerializedName("status")
+    @Expose
+    private String status;
 
 
 
@@ -60,10 +60,35 @@ public class User implements Serializable {
     @Expose
     private String language;
 
+    @SerializedName("role")
+    @Expose
+    private String role;
+
 
     @SerializedName("services")
     @Expose
     private ArrayList<String> services;
+
+
+    @SerializedName("national_id")
+    @Expose
+    private String national_id;
+
+    @SerializedName("national_id_image")
+    @Expose
+    private String national_id_image;
+
+    @SerializedName("certificate_image")
+    @Expose
+    private String certificate_image;
+
+    @SerializedName("verification_created_at")
+    @Expose
+    private String verification_created_at;
+
+    @SerializedName("overall_rate")
+    @Expose
+    private String overall_rate;
 
 
     public String getId() {
@@ -90,9 +115,6 @@ public class User implements Serializable {
         return balance;
     }
 
-    public String getWork_method() {
-        return work_method;
-    }
 
     public String getVerified() {
         return verified;
@@ -120,5 +142,33 @@ public class User implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getNational_id() {
+        return national_id;
+    }
+
+    public String getNational_id_image() {
+        return national_id_image;
+    }
+
+    public String getCertificate_image() {
+        return certificate_image;
+    }
+
+    public String getVerification_created_at() {
+        return verification_created_at;
+    }
+
+    public String getOverall_rate() {
+        return overall_rate;
     }
 }

@@ -51,6 +51,21 @@ public interface ServiceApi {
             @Header("Authorization") String Authorization
     );
 
+    @Multipart
+    @POST("national-id")
+    Call<MsgModel> onKwafiraUploadId(
+            @Header("Authorization") String Authorization,
+            @Part("national_id") RequestBody national_id,
+            @Part MultipartBody.Part national_id_image
+    );
+
+    @Multipart
+    @POST("complete-register")
+    Call<MsgModel> onKwafiraUploadCert(
+            @Header("Authorization") String Authorization,
+            @Part MultipartBody.Part certificate_image
+    );
+
     @FormUrlEncoded
     @POST("resend-verification-code")
     Call<MsgModel> onUserResendVerify(
@@ -106,6 +121,7 @@ public interface ServiceApi {
 
     @GET("orders")
     Call<OrdersResModel> onGetOrders(
+            @Query(value = "status", encoded = true) String status,
             @Header("Authorization") String Authorization);
 
     @POST("order/{id}/cancel")
@@ -148,12 +164,11 @@ public interface ServiceApi {
 
     );
 
-    @FormUrlEncoded
     @Multipart
     @POST("complaint")
     Call<MsgModel> PostComplaint(
             @Header("Authorization") String Authorization,
-            @Field("content") String content,
+            @Part("content") String content,
             @Part("file1") MultipartBody.Part file1,
             @Part("file2") MultipartBody.Part file2,
             @Part("file3") MultipartBody.Part file3
@@ -171,4 +186,11 @@ public interface ServiceApi {
             @Part MultipartBody.Part image
 
     );
+
+    @FormUrlEncoded
+    @POST("user/update")
+    Call<LoginModel> updateUserStatus(
+            @Header("Authorization") String Authorization,
+            @Field("available") int available);
+
 }

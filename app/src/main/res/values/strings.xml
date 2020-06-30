@@ -39,6 +39,14 @@
     <string name="menu_orders">Orders</string>
     <string name="permission_read_external_storage">السماح بالوصول للذاكرة لاختيار صورة الملف الشخصي</string>
     <string name="title_activity_delete">DeleteActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">الحالية</string>
+    <string name="tab_text_2">السابقة</string>
+    <string name="permission_call_required_toast">برجاء الموافقة على اجراء مكالمة</string>
+    <string name="verify_text1">الهوية</string>
+    <string name="verify_text2">الشهادات</string>
+    <string name="terms"><u>لمراجعة الشروط والأحكام</u></string>
+    <string name="reviewing">سيتم مراجعة البيانات\n من قبل الإدارة والرد عليكم\n في أقرب وقت بالقبول أو الرفض</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="title_activity_kwafira_home">KwafiraHomeActivity</string>
+    <string name="title_activity_kwafira_main">KwafiraMainActivity</string>
 </resources>

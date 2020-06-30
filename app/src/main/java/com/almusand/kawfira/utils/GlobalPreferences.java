@@ -17,6 +17,11 @@ public class GlobalPreferences {
     final static String USER_Email = "user_email";
     final static String USER_Name = "name";
     final static String USER_Logged = "logged";
+    final static String KWAFIRA_ID = "kwafiraId";
+    final static String KWAFIRA_CERT = "KWAFIRA_CERT";
+    final static String KWAFIRA_Available = "KWAFIRA_Available";
+    final static String KWAFIRA_Verfied = "KWAFIRA_Verfied";
+    final static String USER_ROLE = "role";
     final static String CART_Counter = "counter";
     final static String Service_ID = "service_id";
     final static String CART_Price = "counter_price";
@@ -40,6 +45,7 @@ public class GlobalPreferences {
         prefsEditor.putString(USER_Img,user.getImage());
         prefsEditor.putString(USER_Email,user.getEmail());
         prefsEditor.putString(USER_Name,user.getName());
+        prefsEditor.putString(USER_ROLE,user.getRole());
         prefsEditor.commit();
     }
 
@@ -65,8 +71,13 @@ public class GlobalPreferences {
             prefsEditor.commit();
         }
     }
+
+
     public int getCartCounter(){
         return prefs.getInt(CART_Counter, 0);
+    }
+    public String getUserRole(){
+        return prefs.getString(USER_ROLE,"client");
     }
 
     public int getCost(){
@@ -121,5 +132,35 @@ public class GlobalPreferences {
 
         prefsEditor.putString(USER_Email,email);
         prefsEditor.commit();
+    }
+
+    public void storeUserIdSent() {
+        prefsEditor.putBoolean(KWAFIRA_ID,true);
+        prefsEditor.commit();
+    }
+    public boolean isIdSent() {
+        return  prefs.getBoolean(KWAFIRA_ID,false);
+    }
+
+    public void storeUserCertSent() {
+        prefsEditor.putBoolean(KWAFIRA_CERT,true);
+        prefsEditor.commit();
+    }
+    public void storeUserAvailable(boolean available) {
+        prefsEditor.putBoolean(KWAFIRA_Available,available);
+        prefsEditor.commit();
+    }
+    public void storeKawfiraVerfied() {
+        prefsEditor.putBoolean(KWAFIRA_Verfied,true);
+        prefsEditor.commit();
+    }
+    public boolean isKawfiraVerfied() {
+        return  prefs.getBoolean(KWAFIRA_Verfied,false);
+    }
+    public boolean isCertSent() {
+        return  prefs.getBoolean(KWAFIRA_CERT,false);
+    }
+    public boolean isAvailable() {
+        return  prefs.getBoolean(KWAFIRA_Available,false);
     }
 }

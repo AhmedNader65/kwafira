@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.almusand.kawfira.BR;
@@ -14,10 +15,12 @@ import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.ViewModelProviderFactory;
 import com.almusand.kawfira.databinding.ActivityLoginBinding;
+import com.almusand.kawfira.kwafira.home.KwafiraMainActivity;
+import com.almusand.kawfira.kwafira.identity.VerifyIdActivity;
+import com.almusand.kawfira.kwafira.reviewing.ReviewingActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.resetPassword.forgot.ForgotPasswordActivity;
 import com.almusand.kawfira.ui.verify.VerificationActivity;
-import com.almusand.kawfira.ui.map.MapActivity;
 import com.almusand.kawfira.ui.register.RegisterActivity;
 import com.almusand.kawfira.utils.GlobalPreferences;
 
@@ -72,6 +75,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
         String password = mActivityLoginBinding.password.getText().toString();
         if (mLoginViewModel.isEmailAndPasswordValid(number, password)) {
             hideKeyboard();
+            showLoading();
             mLoginViewModel.onClickLogin(number, password);
         } else {
             Toast.makeText(this, getString(R.string.invalid_email_password), Toast.LENGTH_SHORT).show();
@@ -81,8 +85,37 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     @Override
     public void register() {
 
-        Intent intent = RegisterActivity.newIntent(LoginActivity.this);
+        Intent intent = RegisterActivity.newIntent(LoginActivity.this)
+                .putExtra("role","client");
+
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void registerKwafira() {
+
+        Intent intent = RegisterActivity.newIntent(LoginActivity.this)
+                .putExtra("role","kwafera");
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void openVerifyIdForKwafira(LoginModel user) {
+        (new GlobalPreferences(this)).storeUserInfo((User) user.getResponse(),user.getAccess_token());
+        (new GlobalPreferences(this)).storeLogged(true);
+        Log.e(user.getResponse().getNational_id(),(user.getResponse().getNational_id() != null)+"");
+        Intent intent = VerifyIdActivity.newIntent(LoginActivity.this).putExtra("idSent", user.getResponse().getNational_id() != null);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void openUnderReviewActivity(LoginModel user) {
+        (new GlobalPreferences(this)).storeUserInfo((User) user.getResponse(),user.getAccess_token());
+        (new GlobalPreferences(this)).storeLogged(true);
+        startActivity(ReviewingActivity.newIntent(this));
         finish();
     }
 
@@ -104,8 +137,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
     }
 
     @Override
+    public void openMainActivityForKwafira(LoginModel model) {
+        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
+        (new GlobalPreferences(this)).storeLogged(true);
+        Intent intent = KwafiraMainActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     public void forget() {
         Intent intent = ForgotPasswordActivity.newIntent(LoginActivity.this);
         startActivity(intent);
     }
+
 }

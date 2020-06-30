@@ -62,7 +62,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,Regis
         String name = mActivityRegisterBinding.name.getText().toString();
         String email = mActivityRegisterBinding.email.getText().toString();
         String phone = mActivityRegisterBinding.num.getText().toString();
-        String role = "client";
+        String role = getIntent().getStringExtra("role");
         String password = mActivityRegisterBinding.password.getText().toString();
         String token = "";
         if (viewModel.isEmailAndPasswordValid(phone,email, password)) {
@@ -73,13 +73,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,Regis
         }
     }
 
-    @Override
-    public void openMainActivity(LoginModel model) {
-        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
-        Intent intent = MapActivity.newIntent(RegisterActivity.this);
-        startActivity(intent);
-        finish();
-    }
 
     @Override
     public void showToast(String msg) {

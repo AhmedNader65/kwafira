@@ -56,8 +56,19 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                         setIsLoading(false);
                         model.getResponse().setToken(model.getAccess_token());
                         userLoginModelMutableLiveData.setValue((User) model.getResponse());
-                        if(((User)model.getResponse()).getVerified().equals("1")) {
-                            getNavigator().openMainActivity(model);
+                        User user = model.getResponse();
+                        if(user.getVerified().equals("1")) {
+                            if(user.getRole().equals("client")) {
+                                getNavigator().openMainActivity(model);
+                            }else{
+                                if(user.getStatus().equals("incomplete")){
+                                    getNavigator().openVerifyIdForKwafira(model);
+                                }else if(user.getStatus().equals("under_review")){
+                                    getNavigator().openUnderReviewActivity(model);
+                                }else if(user.getStatus().equals("accepted")){
+                                    getNavigator().openMainActivityForKwafira(model);
+                                }
+                            }
                         }else{
                             //TODO to verification
                             getNavigator().openVerifyActivity((User) model.getResponse());
@@ -92,6 +103,9 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
 
     public void onServerRegisterClick() {
         getNavigator().register();
+    }
+    public void onServerRegisterAsKwafiraClick() {
+        getNavigator().registerKwafira();
     }
 
 }

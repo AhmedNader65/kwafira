@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/serviceLL"
+    android:layout_width="0dp"
+    app:layout_constraintHorizontal_weight="1"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layoutDirection="rtl"
+    android:orientation="horizontal"
+    android:paddingBottom="14dp"
+    android:layout_gravity="right"
+    android:gravity="right"
+    android:layout_marginLeft="16dp"
+    app:layout_constraintRight_toRightOf="@id/servicesTV"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/servicesTV"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:layout_margin="8dp"
+        android:id="@+id/ball"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/rounded_solid_prim" />
+    <TextView
+        android:id="@+id/serviceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cairo"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@{viewModel.firstService}"
+        tools:text="تصفيف الشعر وإستشواره" />
+
+</LinearLayout>

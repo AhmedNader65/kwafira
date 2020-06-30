@@ -54,7 +54,11 @@ public class VerificationViewModel extends BaseViewModel<VerificationNavigator> 
                             getNavigator().showToast("الكود غير صحيح");
                         }else{
                             Log.e("user", response.body().getResponse().toString());
+                            if (model.getResponse().getRole().equals("client")) {
                                 getNavigator().openMainActivity(model);
+                            }else{
+                                getNavigator().openVerifyIdActivity(model);
+                            }
 
                         }
 
@@ -87,6 +91,7 @@ public class VerificationViewModel extends BaseViewModel<VerificationNavigator> 
     public void resend (String phone) {
         msgModel = null;
         setIsLoading(true);
+        Log.e("number",phone);
         RetroWeb.getClient().create(ServiceApi.class).onUserResendVerify(phone).enqueue(new Callback<MsgModel>() {
             @Override
             public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {

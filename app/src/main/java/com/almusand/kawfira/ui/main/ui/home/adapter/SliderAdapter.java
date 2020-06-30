@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.almusand.kawfira.Models.offers.SliderModel;
 import com.almusand.kawfira.databinding.ItemSliderBinding;
-import com.almusand.kawfira.ui.main.ui.slideshow.SlideshowViewModel;
 import com.almusand.kawfira.ui.main.ui.home.offerDetails.OfferDetailsActivity;
 import com.github.islamkhsh.CardSliderAdapter;
 import com.squareup.picasso.Picasso;
@@ -23,7 +22,6 @@ public class SliderAdapter extends CardSliderAdapter<SliderAdapter.ViewHolder> {
     Context context;
     private List<SliderModel> mData;
 
-    private SlideshowViewModel vm;
 
     private int[] colorArray = new int[]{android.R.color.black, android.R.color.holo_blue_dark, android.R.color.holo_green_dark, android.R.color.holo_red_dark};
 

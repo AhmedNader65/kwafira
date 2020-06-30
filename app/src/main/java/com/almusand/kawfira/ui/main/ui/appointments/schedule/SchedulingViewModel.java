@@ -98,7 +98,6 @@ public class SchedulingViewModel extends BaseViewModel<ScheduleNavigator> {
                     try {
                         FormBody body = (FormBody) call.request().body();
                         Log.e("error reviews", response.errorBody().string());
-                        Log.e("requesttt", call.request().toString());
 
                         final Buffer buffer = new Buffer();
 
