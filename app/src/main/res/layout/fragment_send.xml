@@ -6,14 +6,45 @@
 
     <TextView
         android:id="@+id/text_send"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="تواصلي معنا"
+        android:fontFamily="@font/cairo"
+        android:textColor="@color/black"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/textArea"
+        android:background="@drawable/rounded_solid_grey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="32dp"
+        android:gravity="top|right"
+        android:minLines="5"
+        android:fontFamily="@font/cairo"
+        android:hint="اكتب رسالتك هنا"
+        app:layout_constraintTop_toBottomOf="@id/text_send"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/cairo"
+        android:text="إرسال"
+        app:layout_constraintTop_toBottomOf="@id/textArea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:textColor="#FFF"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

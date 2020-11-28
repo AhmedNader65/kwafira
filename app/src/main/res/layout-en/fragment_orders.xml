@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.main.ui.orders.OrdersViewModel" />
+    </data>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_gravity="left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Orders"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"
+            android:textSize="22sp"/>
+            <com.google.android.material.tabs.TabLayout
+                android:layoutDirection="ltr"
+                android:id="@+id/tabs"
+                android:layout_width="wrap_content"
+                app:tabMaxWidth="0dp"
+                android:layout_gravity="left"
+                app:tabMode="fixed"
+                app:tabTextAppearance="@style/CustomTextStyle"
+                app:tabGravity="start"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                android:layout_height="wrap_content" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layoutDirection="ltr"
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </LinearLayout>
+</layout>

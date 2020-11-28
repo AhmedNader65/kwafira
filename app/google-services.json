@@ -30,6 +30,13 @@
             {
               "client_id": "404164891145-oitt11qki04nhbm8assbl788b4t2jbe7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "404164891145-t41a1i3g8vf5jfnv5onmegt5h0i5qo03.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Kwafera.Kwafera"
+              }
             }
           ]
         }

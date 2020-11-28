@@ -104,7 +104,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
             itemBinding.txtCat.setText(model.getTitle_ar());
             itemBinding.price.setText(model.getInitial_price()+" ريال");
-            Picasso.get().load(model.getImage()).into(itemBinding.imgitemCat);
+            Picasso.get().load(model.getImage()).placeholder(R.drawable.userphoto).into(itemBinding.imgitemCat);
             itemBinding.imgitemCat.setOnClickListener(v -> {
                 Intent intent = ServiceDetailsActivity.newIntent(context)
                         .putExtra("service",model);
@@ -134,7 +134,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         public void onCancelService() {
 
             itemBinding.btn.setBackgroundResource(R.drawable.rounded_solid_prim);
-            itemBinding.btn.setText(" +  اطلب");
+            itemBinding.btn.setText(context.getString(R.string.order));
             pf.decreaseCartCounter(model.getInitial_price());
             itemViewModel.getCartFromPf(pf);
             pf.removeFromCart(model.getId());

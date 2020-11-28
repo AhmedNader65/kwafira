@@ -8,6 +8,7 @@ import android.util.Patterns;
 import com.almusand.kawfira.Bases.BaseViewModel;
 import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
 
@@ -32,7 +33,7 @@ public class ChangeEmailViewModel extends BaseViewModel<ChangeEmailNavigator> {
                 e.printStackTrace();
             }
         }else{
-            getNavigator().showToast("برجاء ادخال البريد الالكتروني بشكل صحيح");
+            getNavigator().showToast("wrongEmail");
         }
     }
 

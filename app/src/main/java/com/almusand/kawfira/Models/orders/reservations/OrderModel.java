@@ -2,12 +2,14 @@ package com.almusand.kawfira.Models.orders.reservations;
 
 import com.almusand.kawfira.Models.Login.Kwafira;
 import com.almusand.kawfira.Models.Login.User;
+import com.almusand.kawfira.Models.SessionModel;
 import com.almusand.kawfira.Models.categories.ServicesModel;
 import com.almusand.kawfira.Models.reservations.ReservationModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class OrderModel implements Serializable {
 
@@ -88,13 +90,28 @@ public class OrderModel implements Serializable {
     @Expose
     private ServicesModel[] services_data;
 
+    @SerializedName("sessions")
+    @Expose
+    private ArrayList<SessionModel> sessions;
+
     @SerializedName("kwafera")
     @Expose
     private User kwafera;
 
+    @SerializedName("client")
+    @Expose
+    private User client;
+
     @SerializedName("updated_at")
     @Expose
     private String updated_at;
+
+
+    @SerializedName("duration")
+    @Expose
+    private int duration;
+
+
 
     public int getId() {
         return id;
@@ -255,5 +272,26 @@ public class OrderModel implements Serializable {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public User getClient() {
+        return client;
+    }
+
+    public ArrayList<SessionModel> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(ArrayList<SessionModel> sessions) {
+        this.sessions = sessions;
+    }
+
+
+    public void addSession(SessionModel sessions) {
+        this.sessions.add( sessions);
+    }
+
+    public int getDuration() {
+        return duration;
     }
 }

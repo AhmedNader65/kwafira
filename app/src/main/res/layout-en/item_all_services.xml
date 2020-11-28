@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCat"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:cardCornerRadius="20dp">
+
+            <ImageView
+                android:id="@+id/imgitem_cat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/black"
+                tools:text="Test"
+                android:gravity="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/price"
+                tools:text="١٠ Riyal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_margin="8dp"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="120 Riyal"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_solid_prim"
+                android:fontFamily="@font/cairo"
+                android:layout_margin="8dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text=" +  Order"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

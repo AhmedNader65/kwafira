@@ -102,7 +102,7 @@ public class SchedulingFragment extends BaseFragment<FragmentSchedulingBinding, 
                         date1 = new SimpleDateFormat("HH:mm",new Locale("ar")).parse(selectedHour+":"+selectedMinute);
                         String timeOfDay = (String) DateFormat.format("hh:mm", date1); // Thursday
                         String AMOrPM = (String) DateFormat.format("a", date1); // Thursday
-                        mFragmentBinding.time.setText(timeOfDay + " "+ CommonUtils.getAMORPMInAR(AMOrPM));
+                        mFragmentBinding.time.setText(timeOfDay + " "+ CommonUtils.getAMORPMInAR(new GlobalPreferences(getContext()).getLanguage(),AMOrPM));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

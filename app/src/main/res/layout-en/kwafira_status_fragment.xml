@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.map.fragments.status.StatusViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:id="@+id/containerKawfiraSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:background="@drawable/very_rounded_solid_white"
+        android:textColor="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        tools:layout_editor_absoluteX="32dp" >
+
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="90dp"
+            android:id="@+id/cardCat"
+            android:layout_width="90dp"
+            android:layout_margin="8dp"
+            android:layout_height="90dp"
+            android:layout_alignParentLeft="true">
+
+            <ImageView
+                android:id="@+id/kwafiraPic"
+                android:src="@{viewModel.profileImage}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center" />
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/kwafiraName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/cardCat"
+            android:fontFamily="@font/cairo"
+            tools:text="فاطمة محمد علي"
+            android:text="@{viewModel.kwafiraName}"
+            android:textColor="#000" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/kwafiraName"
+            android:layout_alignLeft="@+id/kwafiraName"
+            android:layout_marginLeft="16dp"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/rate_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                tools:text="ممتاز"
+                android:text="@{viewModel.rate}"
+                android:layout_gravity="center"
+                android:textSize="9sp"
+                android:textColor="@color/colorPrimary" />
+            <ImageView
+                android:id="@+id/star"
+                android:paddingRight="4dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_awesome_star"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chat_icon"/>
+            <ImageView
+                android:id="@+id/call"
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/call_icon"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/searching"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="32dp"
+        android:background="@drawable/very_rounded_solid_white"
+        android:textColor="#FFF"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        tools:layout_editor_absoluteX="32dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="جاري البحث عن كوافيرة"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/dots"
+            android:textSize="22sp"
+            android:id="@+id/searchingTV"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"
+            />
+        <com.eyalbira.loadingdots.LoadingDots
+            android:id="@+id/dots"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:LoadingDots_auto_play="true"
+
+            app:LoadingDots_dots_color="@color/colorPrimary"
+            app:LoadingDots_dots_count="4"
+            app:LoadingDots_dots_size="6dp"
+            app:LoadingDots_dots_space="1dp"
+
+            app:LoadingDots_loop_duration="800"
+            app:LoadingDots_loop_start_delay="100"
+
+            app:LoadingDots_jump_duration="200"
+            app:LoadingDots_jump_height="4dp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipeup_status"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    <View
+        android:layout_width="100dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:background="#999"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

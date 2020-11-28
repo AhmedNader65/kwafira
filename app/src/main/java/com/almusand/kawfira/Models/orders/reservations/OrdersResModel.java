@@ -14,6 +14,10 @@ public class OrdersResModel implements Serializable {
     @Expose
     private List<OrderModel> orders;
 
+    @SerializedName("order")
+    @Expose
+    private OrderModel order;
+
     @SerializedName("message")
     @Expose
     private String message;
@@ -29,5 +33,9 @@ public class OrdersResModel implements Serializable {
 
     public List<OrderModel>  getOrders() {
         return orders;
+    }
+
+    public OrderModel getOrder() {
+        return order;
     }
 }

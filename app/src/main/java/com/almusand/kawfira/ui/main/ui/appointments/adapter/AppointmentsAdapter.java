@@ -12,6 +12,7 @@ import com.almusand.kawfira.Bases.BaseActivity;
 import com.almusand.kawfira.Bases.BaseViewHolder;
 import com.almusand.kawfira.Models.offers.SliderModel;
 import com.almusand.kawfira.Models.reservations.ReservationModel;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.AppointmentItemBinding;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.main.ui.appointments.AppointmentsViewModel;
@@ -71,10 +72,10 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             final ReservationModel appointmentModel = data.get(position);
-            viewModel = new AppointmentViewModel(appointmentModel);
+            viewModel = new AppointmentViewModel(appointmentModel,context);
             viewModel.setNavigator(this);
             itemBinding.delete.setOnClickListener(v -> {
-                ((HomeActivity)context).showDialog("تنبية هام","هل أنت متأكد من الغاء الحجز؟","تأكيد الإلغاء", v1 -> {
+                ((HomeActivity)context).showDialog(context.getString(R.string.alert),context.getString(R.string.cancel_msg),context.getString(R.string.confirm_cancel), v1 -> {
                     viewModel.cancelOrder(gp.getUserAuth(),appointmentModel.getId()+"");
 
                     ((HomeActivity)context).dismissDialogNow();

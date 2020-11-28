@@ -30,13 +30,11 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <ImageView
+                    android:id="@+id/emptyOffers"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="لا توجد عروض"
-                    android:id="@+id/emptyOffers"
-                    android:fontFamily="@font/cairo"
-                    android:gravity="center"/>
+                    android:src="@drawable/nooffers"/>
                 <com.github.islamkhsh.CardSliderViewPager
                     android:id="@+id/viewPager"
                     android:layoutDirection="rtl"
@@ -175,13 +173,14 @@
 </ScrollView>
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/cart"
+                android:visibility="gone"
                 android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:layoutDirection="ltr"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="0dp"

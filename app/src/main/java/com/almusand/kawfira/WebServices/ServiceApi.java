@@ -1,5 +1,6 @@
 package com.almusand.kawfira.WebServices;
 
+import com.almusand.kawfira.Models.AboutUsModel;
 import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.MsgModel;
 import com.almusand.kawfira.Models.categories.CategoriesResponseModel;
@@ -9,11 +10,14 @@ import com.almusand.kawfira.Models.orders.reservations.OrdersResModel;
 import com.almusand.kawfira.Models.reservations.ReservationResModel;
 import com.almusand.kawfira.ui.kwafiraReviewProfile.ReviewsResponseModel;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -31,6 +35,11 @@ public interface ServiceApi {
     Call<LoginModel> onLogin(
             @Field("phone") String mobile,
             @Field("password") String password
+    );
+
+    @POST("logout")
+    Call<MsgModel> logout(
+            @Header("Authorization") String Authorization
     );
 
     @FormUrlEncoded
@@ -124,10 +133,21 @@ public interface ServiceApi {
             @Query(value = "status", encoded = true) String status,
             @Header("Authorization") String Authorization);
 
+    @GET("kwafera-orders")
+    Call<OrdersResModel> onGetKwafiraOrders(
+            @Header("Authorization") String Authorization);
+
     @POST("order/{id}/cancel")
     Call<MsgModel> onCancelOrder(
             @Path(value = "id", encoded = true) String id_,
             @Header("Authorization") String Authorization);
+
+    @FormUrlEncoded
+    @POST("order/accept")
+    Call<MsgModel> onAcceptOrder(
+            @Field("order_id") String order_id,
+            @Header("Authorization") String Authorization);
+
     @GET("categories")
     Call<CategoriesResponseModel> onGetCategories();
 
@@ -153,7 +173,7 @@ public interface ServiceApi {
     );
     @FormUrlEncoded
     @POST("order/initiate")
-    Call<MsgModel> PostOrder(
+    Call<OrdersResModel> PostOrder(
             @Header("Authorization") String Authorization,
             @Field("address") String address,
             @Field("appartment_number") String appartment_number,
@@ -168,10 +188,10 @@ public interface ServiceApi {
     @POST("complaint")
     Call<MsgModel> PostComplaint(
             @Header("Authorization") String Authorization,
-            @Part("content") String content,
-            @Part("file1") MultipartBody.Part file1,
-            @Part("file2") MultipartBody.Part file2,
-            @Part("file3") MultipartBody.Part file3
+            @Part("content") RequestBody content,
+            @Part MultipartBody.Part file1,
+            @Part MultipartBody.Part file2,
+            @Part MultipartBody.Part file3
 
     );
 
@@ -187,10 +207,92 @@ public interface ServiceApi {
 
     );
 
+
+    @FormUrlEncoded
+    @POST("user/update")
+    Call<LoginModel> updateKwafiraServices(
+            @Header("Authorization") String Authorization,
+            @Field("services[]") ArrayList<String> services
+
+    );
+
     @FormUrlEncoded
     @POST("user/update")
     Call<LoginModel> updateUserStatus(
             @Header("Authorization") String Authorization,
             @Field("available") int available);
+
+    @FormUrlEncoded
+    @POST("notification")
+    Call<MsgModel> sendNotification(
+            @Header("Authorization") String Authorization,
+            @Field("user_id") String user_id,
+            @Field("header") String header,
+            @Field("body") String body,
+            @Field("type") String type
+    );
+
+    @FormUrlEncoded
+    @POST("order/{id}/session/start")
+    Call<MsgModel> startService(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization,
+            @Field("service_id") String service_id,
+            @Field("created_at") String time
+    );
+    @FormUrlEncoded
+    @POST("order/{id}/session/end")
+    Call<MsgModel> stopService(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization,
+            @Field("session_id") String service_id
+    );
+
+    @FormUrlEncoded
+    @POST("order/{id}/apply-coupon")
+    Call<OrdersResModel> applyOffer(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization,
+            @Field("coupon") String coupon
+    );
+
+    @POST("order/{id}/end")
+    Call<OrdersResModel> endOrder(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization
+    );
+
+    @POST("order/{id}/confirm")
+    Call<MsgModel> confirmPayment(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization
+    );
+
+    @FormUrlEncoded
+    @POST("order/{id}/pay")
+    Call<OrdersResModel> payOrder(
+            @Path(value = "id", encoded = true) String order_id,
+            @Header("Authorization") String Authorization,
+            @Field("method") String method
+    );
+    @FormUrlEncoded
+    @POST("review")
+    Call<MsgModel> review(
+            @Header("Authorization") String Authorization,
+            @Field("content") String content,
+            @Field("order_id") int order_id,
+            @Field("reviewed_id") int reviewed_id,
+            @Field("stars") float stars
+    );
+
+    @FormUrlEncoded
+    @POST("contact-us-message")
+    Call<MsgModel> contactUs(
+            @Header("Authorization") String Authorization,
+            @Field("content") String content
+    );
+
+    @GET("about-us")
+    Call<AboutUsModel> aboutUs();
 
 }

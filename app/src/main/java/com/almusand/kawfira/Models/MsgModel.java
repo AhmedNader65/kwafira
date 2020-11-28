@@ -1,10 +1,12 @@
 package com.almusand.kawfira.Models;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class MsgModel implements Serializable {
     @SerializedName("code")
@@ -14,6 +16,9 @@ public class MsgModel implements Serializable {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("session")
+    @Expose
+    private SessionModel session;
 
     public String getMessage() {
         return message;
@@ -23,4 +28,7 @@ public class MsgModel implements Serializable {
         return code;
     }
 
+    public SessionModel getSession() {
+        return session;
+    }
 }

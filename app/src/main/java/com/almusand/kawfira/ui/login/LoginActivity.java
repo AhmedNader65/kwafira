@@ -15,6 +15,7 @@ import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.ViewModelProviderFactory;
 import com.almusand.kawfira.databinding.ActivityLoginBinding;
+import com.almusand.kawfira.kwafira.KwafiraServicesChoices;
 import com.almusand.kawfira.kwafira.home.KwafiraMainActivity;
 import com.almusand.kawfira.kwafira.identity.VerifyIdActivity;
 import com.almusand.kawfira.kwafira.reviewing.ReviewingActivity;
@@ -103,17 +104,23 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
 
     @Override
     public void openVerifyIdForKwafira(LoginModel user) {
-        (new GlobalPreferences(this)).storeUserInfo((User) user.getResponse(),user.getAccess_token());
+        (new GlobalPreferences(this)).storeUserInfo(user.getResponse(),user.getAccess_token());
         (new GlobalPreferences(this)).storeLogged(true);
         Log.e(user.getResponse().getNational_id(),(user.getResponse().getNational_id() != null)+"");
-        Intent intent = VerifyIdActivity.newIntent(LoginActivity.this).putExtra("idSent", user.getResponse().getNational_id() != null);
+        Intent intent;
+        if(user.getResponse().getNational_id() != null){
+             intent = VerifyIdActivity.newIntent(LoginActivity.this).putExtra("idSent", user.getResponse().getNational_id() != null);
+        }else{
+             intent = KwafiraServicesChoices.newIntent(LoginActivity.this);
+
+        }
         startActivity(intent);
         finish();
     }
 
     @Override
     public void openUnderReviewActivity(LoginModel user) {
-        (new GlobalPreferences(this)).storeUserInfo((User) user.getResponse(),user.getAccess_token());
+        (new GlobalPreferences(this)).storeUserInfo(user.getResponse(),user.getAccess_token());
         (new GlobalPreferences(this)).storeLogged(true);
         startActivity(ReviewingActivity.newIntent(this));
         finish();
@@ -129,7 +136,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
 
     @Override
     public void openMainActivity(LoginModel model) {
-        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
+        (new GlobalPreferences(this)).storeUserInfo(model.getResponse(),model.getAccess_token());
         (new GlobalPreferences(this)).storeLogged(true);
         Intent intent = HomeActivity.newIntent(LoginActivity.this);
         startActivity(intent);
@@ -138,11 +145,17 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding,LoginViewMo
 
     @Override
     public void openMainActivityForKwafira(LoginModel model) {
-        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
+        (new GlobalPreferences(this)).storeUserInfo(model.getResponse(),model.getAccess_token());
         (new GlobalPreferences(this)).storeLogged(true);
         Intent intent = KwafiraMainActivity.newIntent(LoginActivity.this);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void wrongInfo() {
+        hideLoading();
+        Toast.makeText(this, R.string.wrongInfo, Toast.LENGTH_SHORT).show();
     }
 
     @Override

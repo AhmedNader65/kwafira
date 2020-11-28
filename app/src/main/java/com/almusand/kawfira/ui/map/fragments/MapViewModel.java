@@ -21,10 +21,13 @@ public class MapViewModel extends BaseViewModel<MapsNavigator> {
         if(validateText.length()>1) {
             getNavigator().showToast(validateText);
         }else{
-            getNavigator().showType();
+            getNavigator().showType(address,homeNum,apartNum);
         }
     }
 
+    public void confirmAddress(String address,String homeNum,String apartNum,String lat ,String lng){
+        getNavigator2().showType(address,homeNum,apartNum,lat,lng);
+    }
     private String validate(String address, String homeNum, String apartNum) {
         if(address.length()<2)
             return "برجاء تحديد المكان على الخريطة";

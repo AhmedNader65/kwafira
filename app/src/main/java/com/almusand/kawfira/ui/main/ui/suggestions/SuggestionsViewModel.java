@@ -13,15 +13,18 @@ import com.almusand.kawfira.Models.categories.ServicesResponseModel;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuggestionsViewModel extends BaseViewModel {
+public class SuggestionsViewModel extends BaseViewModel<SuggestionsNavigator> {
 
     private MutableLiveData<String> mText;
 
@@ -35,18 +38,62 @@ public class SuggestionsViewModel extends BaseViewModel {
     }
 
 
-    public void postComplaint(String auth, String content, MultipartBody.Part multipartBody1, MultipartBody.Part multipartBody2, MultipartBody.Part multipartBody3){
+    public void postComplaint(String auth, String content, String filePath1,String filePath2,String filePath3){
+        MultipartBody.Part file1Body;
+
+        if(filePath1==null){
+            file1Body= null;
+        }else{
+
+            File file = new File(filePath1);
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+// MultipartBody.Part is used to send also the actual file name
+            file1Body =
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        }
+        MultipartBody.Part file2Body;
+
+        if(filePath2==null){
+            file2Body= null;
+        }else{
+
+            File file = new File(filePath2);
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+// MultipartBody.Part is used to send also the actual file name
+            file2Body =
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        }
+        MultipartBody.Part file3Body;
+
+        if(filePath3==null){
+            file3Body= null;
+        }else{
+
+            File file = new File(filePath3);
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+// MultipartBody.Part is used to send also the actual file name
+            file3Body =
+                    MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        }
+
+        RequestBody contentBody = RequestBody.create(MediaType.parse("text/plain"), content);
+
         RetroWeb.getClient().create(ServiceApi.class).PostComplaint("bearer "+auth,
-                content,multipartBody1,
-                multipartBody2,
-                multipartBody3).enqueue(new Callback<MsgModel>() {
+                contentBody,file1Body,
+                file2Body,
+                file3Body).enqueue(new Callback<MsgModel>() {
             @Override
             public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
                 if (response.isSuccessful()) {
                     MsgModel model = response.body();
                     String msg = model.getMessage();
-//                    servicesLiveData.setValue(modelList);
-
+                    getNavigator().showSuccessToast("تم ارسال رسالتك بنجاح");
                     setIsLoading(false);
 
                 } else {
@@ -69,5 +116,13 @@ public class SuggestionsViewModel extends BaseViewModel {
             }
 
         });
+    }
+
+    public void confirm(String userAuth, String toString, String filePath1, String filePath2, String filePath3) {
+        if(toString.length()>1){
+            postComplaint(userAuth,toString,filePath1,filePath2,filePath3);
+        }else{
+            getNavigator().showToast("برحاء كتابة تعليق");
+        }
     }
 }

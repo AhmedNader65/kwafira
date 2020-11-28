@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,6 +15,9 @@ import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.text.format.DateFormat;
+import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -22,6 +27,7 @@ import com.almusand.kawfira.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,7 +66,7 @@ public final class CommonUtils {
         is.read(buffer);
         is.close();
 
-        return new String(buffer, "UTF-8");
+        return new String(buffer, StandardCharsets.UTF_8);
     }
 
     public static ProgressDialog showLoadingDialog(Context context) {
@@ -80,7 +86,7 @@ public final class CommonUtils {
         new CountDownTimer(millis, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                (view).setText("الوقت المتبقى للارسال مرة اخرى " + millisUntilFinished / 1000);
+                (view).setText(view.getContext().getString(R.string.remainingtime) + millisUntilFinished / 1000);
                 //here you can have your logic to set text to edittext
             }
 
@@ -98,21 +104,25 @@ public final class CommonUtils {
         return date;
     }
 
-    public static String getAMORPMInAR(String amOrPM) {
-        Log.e("amOrPm",amOrPM);
-        String amOrPm = amOrPM;
-            switch (amOrPM){
+    public static String getAMORPMInAR(String lang,String amOrPM) {
+        if(lang.equals("en")) {
+            return amOrPM;
+        }else {
+            Log.e("amOrPm", amOrPM);
+            String amOrPm = amOrPM;
+            switch (amOrPM) {
                 case "AM":
-                    return  "صباحاً";
+                    return "صباحاً";
                 case "PM":
                     return "مساءً";
                 case "am":
-                    return  "صباحاً";
+                    return "صباحاً";
                 case "pm":
                     return "مساءً";
             }
-        Log.e("amOrPm","returning");
-        return amOrPm;
+            Log.e("amOrPm", "returning");
+            return amOrPm;
+        }
     }
 
     public static String getDateInAr(String dayOfTheWeek) {
@@ -241,4 +251,71 @@ public final class CommonUtils {
         }
         return result;
     }
+
+    public static String milliToTime(String locale, long millis){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm ");
+        Date date = new Date(millis);
+        String time = simpleDateFormat.format(date);
+        String AMOrPM = (String) DateFormat.format("a", date); // Thursday
+        long now = System.currentTimeMillis();
+        String x = (String) DateUtils.getRelativeTimeSpanString(millis,now, DateUtils.MINUTE_IN_MILLIS);
+        if(DateUtils.isToday(millis)){
+            return time + CommonUtils.getAMORPMInAR(locale,AMOrPM);
+        }else{
+            if(locale.equals("en")) {
+                return x + " . " + time + AMOrPM;
+            }else {
+
+                translate(x);
+                return translate(x) + " . " + time + CommonUtils.getAMORPMInAR(locale,AMOrPM);
+            }
+        }
+    }
+
+    private static String translate(String x) {
+        String newX;
+        newX = x;
+        if(x.contains("yesterday")){
+            newX = x.replace("yesterday","أمس");
+        }else if (x.contains("2 days ago")){
+            newX = x.replace("2 days ago","منذ يومين");
+        }else if (x.contains("days ago")){
+            newX = x.replace("days ago","ايام مضت");
+        }else {
+            if(Character.isAlphabetic(x.charAt(0))){
+                Log.e("first case", "yes");
+                newX =  " " + x.substring(4, 6) +" "+getMonthInAr(x.substring(0, 3)) + " " + x.substring(7);
+
+            }else{
+                Log.e("second case", "yes");
+                if (Character.isDigit(x.charAt(1))) {
+                    newX = x.substring(0, 2) + " " + getMonthInAr(x.substring(3, 6)) + " " + x.substring(7);
+                } else {
+
+                    newX = x.substring(0, 1) + " " + getMonthInAr(x.substring(2, 5)) + " " + x.substring(6);
+
+                }
+            }
+        }
+        return newX;
+    }
+
+    public static void setLocale(Context context,String lang) {
+
+        Resources res = context.getResources();
+        // Change locale settings in the app.
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            conf.setLocale(new Locale(lang)); // API 17+ only.
+        }
+        // Use conf.locale = new Locale(...) if targeting lower versions
+        res.updateConfiguration(conf, dm);
+    }
+    public static String getLocale() {
+
+        return Locale.getDefault().getLanguage();
+    }
+
 }

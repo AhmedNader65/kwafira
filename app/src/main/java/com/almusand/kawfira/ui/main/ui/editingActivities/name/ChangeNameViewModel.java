@@ -6,6 +6,7 @@ import android.util.Log;
 import com.almusand.kawfira.Bases.BaseViewModel;
 import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
 

@@ -22,4 +22,6 @@ public interface LoginNavigator {
     void openUnderReviewActivity(LoginModel model);
 
     void openMainActivityForKwafira(LoginModel model);
+
+    void wrongInfo();
 }

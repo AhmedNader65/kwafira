@@ -11,21 +11,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.almusand.kawfira.BR;
 import com.almusand.kawfira.Bases.BaseActivity;
+import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ActivityKwafiraRevProfileBinding;
 import com.almusand.kawfira.ui.register.RegisterActivity;
 import com.almusand.kawfira.utils.GlobalPreferences;
+import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 public class KwafiraRevProfile extends BaseActivity<ActivityKwafiraRevProfileBinding,KwafiraRevViewModel> implements KwafiraRevNavigator {
 
     ActivityKwafiraRevProfileBinding kwafiraRevProfileBinding;
     KwafiraRevViewModel model;
+    private User kwafira;
 
     @Override
     public int getBindingVariable() {
@@ -48,6 +53,7 @@ public class KwafiraRevProfile extends BaseActivity<ActivityKwafiraRevProfileBin
         super.onCreate(savedInstanceState);
         kwafiraRevProfileBinding = getViewDataBinding();
         model.setNavigator(this);
+        kwafira = (User) getIntent().getSerializableExtra("Kwafira");
         setUp();
     }
 
@@ -57,10 +63,21 @@ public class KwafiraRevProfile extends BaseActivity<ActivityKwafiraRevProfileBin
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         kwafiraRevProfileBinding.reviews.setLayoutManager(mLayoutManager);
         kwafiraRevProfileBinding.reviews.setItemAnimator(new DefaultItemAnimator());
-        model.getData(pf.getUserId(),pf.getUserAuth()).observe(this, reviewModel -> {
+        model.getData(kwafira.getId(),pf.getUserAuth()).observe(this, reviewModel -> {
             adapter.setData(reviewModel.getReviews());
         });
         kwafiraRevProfileBinding.reviews.setAdapter(adapter);
+        kwafiraRevProfileBinding.username.setText(kwafira.getName());
+            try{
+            Picasso.get().load(kwafira.getImage()).placeholder(R.drawable.userphoto).into(kwafiraRevProfileBinding.userPic);
+        }catch (Exception e){}
+        try{
+            kwafiraRevProfileBinding.rateText.setText(String.format("%.2f",Float.valueOf(kwafira.getOverall_rate())));
+            kwafiraRevProfileBinding.listitemrating.setRating(Float.parseFloat(kwafira.getOverall_rate()));
+        }catch (Exception e){
+            kwafiraRevProfileBinding.listitemrating.setVisibility(View.INVISIBLE);
+            kwafiraRevProfileBinding.rateText.setText("لا توجد تقييمات");
+        }
     }
 
     public static Intent newIntent(Context context) {

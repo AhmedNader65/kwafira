@@ -56,6 +56,9 @@ public class AppointmentsFragment extends BaseFragment<FragmentAppointmentsBindi
     }
 
     Observer<List<ReservationModel>> resListUpdateObserver = resList -> {
+        if(resList.size()>0){
+            mFragmentBinding.empty.setVisibility(View.GONE);
+        }
         AppointmentsAdapter adapter = new AppointmentsAdapter(appointmentsViewModel,this);
         mFragmentBinding.appointmentsList.setAdapter(adapter);
         adapter.renewItems(resList);

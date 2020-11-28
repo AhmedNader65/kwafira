@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.almusand.kawfira.Models.categories.CategoriesModel;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ItemCategoriesBinding;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.squareup.picasso.Picasso;
@@ -79,7 +80,7 @@ public class AllCategoriesAdapter extends RecyclerView.Adapter<AllCategoriesAdap
 
             CategoriesModel model = mData.get(position);
             itemBinding.txtCat.setText(model.getName_ar());
-            Picasso.get().load(model.getImage()).into(itemBinding.imgitemCat);
+            Picasso.get().load(model.getImage()).placeholder(R.drawable.userphoto).into(itemBinding.imgitemCat);
             itemBinding.getRoot().setOnClickListener(v -> {
 
                 Intent intent = ServicesActivity.newIntent(context)

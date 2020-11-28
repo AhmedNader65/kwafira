@@ -78,6 +78,7 @@ public class CertFragment extends BaseFragment<CertFragmentBinding,CertViewModel
         });
 
         binding.button.setOnClickListener(v -> {
+            showLoading();
             mViewModel.validateAndSave(gp.getUserAuth(),filePath);
         });
     }
@@ -124,11 +125,13 @@ public class CertFragment extends BaseFragment<CertFragmentBinding,CertViewModel
 
     @Override
     public void showToast(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+        hideLoading();
+        Toast.makeText(getContext(), getString(R.string.wrong_cert), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void toNextActivity() {
+        hideLoading();
         mListener.onUserCertDone();
     }
 

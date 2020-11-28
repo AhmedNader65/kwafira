@@ -67,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="14dp"
             android:fontFamily="@font/cairo"
-            android:text="@{viewModel.kwafiraName}"
             android:textColor="@color/black"
             android:textSize="16dp"
             android:textStyle="bold"

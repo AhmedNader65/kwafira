@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+    </data>
+<RelativeLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sliderImg"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:background="@drawable/bottom_rounded_transp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sliderTxt"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:fontFamily="@font/cairo"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/sliderImg"/>
+
+</RelativeLayout>
+</layout>

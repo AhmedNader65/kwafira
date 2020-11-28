@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.almusand.kawfira.Models.offers.SliderModel;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ItemSliderBinding;
 import com.almusand.kawfira.ui.main.ui.home.offerDetails.OfferDetailsActivity;
 import com.github.islamkhsh.CardSliderAdapter;
@@ -85,7 +86,7 @@ public class SliderAdapter extends CardSliderAdapter<SliderAdapter.ViewHolder> {
 
             SliderModel model = mData.get(position);
             itemBinding.sliderTxt.setText(model.getTitle_ar());
-            Picasso.get().load(model.getImage()).into(itemBinding.sliderImg);
+            Picasso.get().load(model.getImage()).placeholder(R.drawable.userphoto).into(itemBinding.sliderImg);
             itemBinding.container.setOnClickListener(v -> {
 
                 Intent intent = OfferDetailsActivity.newIntent(context)

@@ -81,6 +81,7 @@ public class IdFragment extends BaseFragment<FragmentIdBinding,IdViewModel>  imp
         });
 
         binding.button.setOnClickListener(v -> {
+            showLoading();
             mViewModel.validateAndSave(gp.getUserAuth(),binding.idET.getText().toString(),filePath);
         });
     }
@@ -126,11 +127,14 @@ public class IdFragment extends BaseFragment<FragmentIdBinding,IdViewModel>  imp
 
     @Override
     public void showToast(String msg) {
+        hideLoading();
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void toNextTab() {
+
+        hideLoading();
         mListener.onUserIdDone();
     }
 

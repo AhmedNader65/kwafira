@@ -151,37 +151,6 @@ public class ServicesActivity extends BaseActivity<ActivityAllServicesBinding, S
         binding.services.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         binding.services.setAdapter(servicesAdapter);
         servicesAdapter.renewItems(servicesList);
-
-        ServicesModel model2 = new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم 3");
-        model2.setInitial_price(1400);
-        model2.setTitle_en("offer num 3");
-        model2.setImage("https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg");
-        if (model2 == null) {
-            Log.e("model2", "null");
-        }
-        if (servicesAdapter == null) {
-            Log.e("servicesAdapter", "null");
-        }
-        servicesAdapter.addItem(model2);
-        model2 = new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم 4");
-        model2.setTitle_en("offer num 3");
-        model2.setInitial_price(10);
-        model2.setImage("https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg");
-        servicesAdapter.addItem(model2);
-        model2 = new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم ٥");
-        model2.setTitle_en("offer num 3");
-        model2.setInitial_price(30);
-        model2.setImage("https://en.es-static.us/upl/2018/12/comet-wirtanen-Jack-Fusco-dec-2018-Anza-Borrego-desert-CA-e1544613895713.jpg");
-        servicesAdapter.addItem(model2);
     };
 
 //    @Override

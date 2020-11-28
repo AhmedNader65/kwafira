@@ -22,11 +22,11 @@
             android:checkable="true" />
 
             <item
-                android:id="@+id/nav_logout"
+                android:id="@+id/nav_send"
                 android:title="     تواصلي معنا"
                 android:checkable="true"/>
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_about"
                 android:title="     عن كوفيرة"
                 android:checkable="true"/>
             <item

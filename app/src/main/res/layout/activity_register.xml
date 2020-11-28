@@ -14,9 +14,6 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
         <ScrollView
@@ -41,7 +38,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:text="إنشاء حساب"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:fontFamily="@font/cairo"
                     android:textColor="@color/black"
@@ -60,16 +57,13 @@
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
                 <EditText
                     android:id="@+id/name"
-                    android:text="Ahmed"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_margin="16dp"
                     android:ems="10"
                     android:inputType="text"
                     android:hint="الإسم بالكامل"
@@ -86,25 +80,20 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/cairo"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
                     android:background="@color/edit_color"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="+996"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/name"
                     app:layout_constraintTop_toBottomOf="@+id/name"
                     android:gravity="center"
                     />
 
                 <EditText
-                    android:text="01026383910"
                     android:id="@+id/num"
                     android:fontFamily="@font/cairo"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:ems="10"
@@ -113,7 +102,7 @@
                     android:hint="رقم الهاتف"
                     app:layout_constraintBottom_toBottomOf="@+id/code"
                     app:layout_constraintEnd_toStartOf="@+id/code"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/name"
                     app:layout_constraintTop_toTopOf="@+id/code"
                     android:background="@color/edit_color"
                     />
@@ -121,7 +110,6 @@
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="0dp"
-                    android:text="Ahmed@gmail.com"
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
                     android:ems="10"
@@ -140,7 +128,6 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
                     android:ems="10"
-                    android:text="123456"
                     android:inputType="textPassword"
                     android:hint="كلمة المرور 8 احرف على الأقل"
                     android:gravity="right|center_vertical"
@@ -151,7 +138,6 @@
                     android:background="@color/edit_color"
                     />
                 <EditText
-                    android:text="123456"
                     android:id="@+id/password2"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -204,5 +190,4 @@
 
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

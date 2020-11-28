@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".kwafira.home.ui.home.HomeKwafiraFragment">
+
+
+    <fragment
+        android:id="@+id/statusFragment"
+        tools:layout="@layout/fragment_status"
+        app:layout_constraintTop_toTopOf="parent"
+        android:name="com.almusand.kawfira.kwafira.home.ui.home.status.StatusFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/statusContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/swipeup_status"
+        app:layout_constraintTop_toBottomOf="@id/statusFragment"
+        tools:layout="@layout/kwafira_order_item" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipeup_status"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:elevation="5dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <View
+            android:layout_width="50dp"
+            android:layout_height="3dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:background="#999"/>
+        <TextView
+            android:id="@+id/orderNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="طلبات قيد التنفيذ  (0)"
+            android:fontFamily="@font/cairo"
+            android:textColor="@color/colorPrimary"
+            android:padding="16dp"/>
+    </LinearLayout>
+    <FrameLayout
+        android:id="@+id/bottom_fragment_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        tools:openDrawer="left">
 
         <include
             layout="@layout/content_main_kwafira"
@@ -21,7 +21,7 @@
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
+            android:layout_gravity="left"
             android:fitsSystemWindows="true"
             app:itemStyle="rounded_right"
             app:itemTextColor="@color/drawer_item"
@@ -31,6 +31,7 @@
             app:theme="@style/mySyle.Drawer"
             app:headerLayout="@layout/nav_header_main">
             <RelativeLayout
+                android:id="@+id/relative"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout

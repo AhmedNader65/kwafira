@@ -25,7 +25,7 @@ public class KwafiraRevViewModel extends BaseViewModel<KwafiraRevNavigator> {
     private void getReviews(String userId,String auth) {
         Log.e("autherntication",auth);
 
-        RetroWeb.getClient().create(ServiceApi.class).onGetReviews("8","Bearer "+auth).enqueue(new Callback<ReviewsResponseModel>() {
+        RetroWeb.getClient().create(ServiceApi.class).onGetReviews(userId,"Bearer "+auth).enqueue(new Callback<ReviewsResponseModel>() {
             @Override
             public void onResponse(Call<ReviewsResponseModel> call, Response<ReviewsResponseModel> response) {
                 if (response.isSuccessful()) {

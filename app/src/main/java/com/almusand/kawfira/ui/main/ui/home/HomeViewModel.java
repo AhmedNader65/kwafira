@@ -46,7 +46,6 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
                 Log.e("response", "response.toString()");
                 if (response.isSuccessful()) {
                     OffersModel model = response.body();
-                    Log.e("loggg",model.getOffer().get(0).getDescription_ar());
                     List<SliderModel> modelList = model.getOffer();
                     offersLiveData.setValue(modelList);
                     setIsLoading(false);
@@ -78,7 +77,6 @@ public class HomeViewModel extends BaseViewModel<HomeNavigator> {
                 if (response.isSuccessful()) {
                     CategoriesResponseModel model = response.body();
                     List<CategoriesModel> modelList = model.getCategories();
-                    Log.e("cat","here to set value");
                     catLiveData.setValue(modelList);
                     setIsLoading(false);
 

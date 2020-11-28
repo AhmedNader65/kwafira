@@ -19,6 +19,7 @@ import com.almusand.kawfira.R;
 import com.almusand.kawfira.ViewModelProviderFactory;
 import com.almusand.kawfira.databinding.FragmentSchedulingBinding;
 import com.almusand.kawfira.utils.CommonUtils;
+import com.almusand.kawfira.utils.GlobalPreferences;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,18 +58,12 @@ public class SchedulingFragment extends BaseFragment<FragmentSchedulingBinding, 
 
 
         mFragmentBinding.confirmDate.setOnClickListener(v -> validateDate());
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
+        DatePickerDialog.OnDateSetListener date = (view1, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
         };
 
 
@@ -94,7 +89,7 @@ public class SchedulingFragment extends BaseFragment<FragmentSchedulingBinding, 
                         date1 = new SimpleDateFormat("HH:mm",new Locale("ar")).parse(selectedHour+":"+selectedMinute);
                         String timeOfDay = (String) DateFormat.format("hh:mm", date1); // Thursday
                         String AMOrPM = (String) DateFormat.format("a", date1); // Thursday
-                        mFragmentBinding.time.setText(timeOfDay + " "+ CommonUtils.getAMORPMInAR(AMOrPM));
+                        mFragmentBinding.time.setText(timeOfDay + " "+ CommonUtils.getAMORPMInAR(new GlobalPreferences(getContext()).getLanguage(),AMOrPM));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

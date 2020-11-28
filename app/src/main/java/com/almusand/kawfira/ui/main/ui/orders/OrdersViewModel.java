@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrdersViewModel extends BaseViewModel {
+public class OrdersViewModel extends BaseViewModel<CurrentOrdersNavigator> {
     private MutableLiveData<List<OrderModel>> resLiveData = new MutableLiveData<>();
     public MutableLiveData<List<OrderModel>> getResLiveData() {
         return resLiveData;
@@ -35,7 +35,19 @@ public class OrdersViewModel extends BaseViewModel {
                     List<OrderModel> modelList = model.getOrders();
                     resLiveData.setValue(modelList);
                     setIsLoading(false);
+                    if(modelList.size()>0) {
+                        try {
+                            if (modelList.get(0).getStatus().equals("payment")||modelList.get(0).getStatus().equals("awaiting_confirmation")) {
 
+                                getNavigator().openPayment(modelList.get(0));
+                            } else {
+
+                                getNavigator().showStatusFragment();
+                            }
+                        }catch (Exception e){
+
+                        }
+                    }
                 } else {
                     try {
                         Log.e("error reviews", response.errorBody().string());

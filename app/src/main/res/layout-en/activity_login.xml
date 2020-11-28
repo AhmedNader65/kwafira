@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mindorks.framework.mvvm.ui.login.LoginActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.login.LoginViewModel" />
+
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Welcome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/cairo"
+                android:text="to Kwafira Application"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Be Special with Kwafira Services delivered to your place with special offers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                android:fontFamily="@font/cairo"
+                />
+
+
+            <EditText
+                android:id="@+id/num"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/cairo"
+                android:hint="@string/phonenumber"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/code"
+                app:layout_constraintStart_toEndOf="@+id/code"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/code"
+                android:background="@color/edit_color"
+                />
+
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:background="@color/edit_color"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="+996"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5"
+                android:gravity="center"
+                />
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:hint="Password"
+                android:gravity="center"
+                android:fontFamily="@font/cairo"
+                app:layout_constraintStart_toStartOf="@id/code"
+                app:layout_constraintEnd_toEndOf="@+id/num"
+                app:layout_constraintTop_toBottomOf="@+id/num"
+                android:background="@color/edit_color"
+                />
+
+            <TextView
+                android:id="@+id/forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                android:onClick="@{() ->viewModel.onServerForgetClick()}"
+                android:text="Forgot password?"
+                android:layout_margin="16dp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="88dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/cairo"
+                android:onClick="@{() -> viewModel.onServerLoginClick()}"
+                android:text="Login"
+                android:textColor="#FFF"
+                app:layout_constraintEnd_toEndOf="@+id/password"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/password"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="24dp"
+                android:text="Create new Kwafira account"
+                android:onClick="@{() ->viewModel.onServerRegisterAsKwafiraClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12dp"
+                />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/cairo"
+                android:onClick="@{() ->viewModel.onServerRegisterClick()}"
+                android:text="Create new account"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

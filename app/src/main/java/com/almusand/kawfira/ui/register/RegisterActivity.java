@@ -67,6 +67,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,Regis
         String token = "";
         if (viewModel.isEmailAndPasswordValid(phone,email, password)) {
             hideKeyboard();
+            showLoading();
             viewModel.onClickRegister(name,email,phone, password,role,token);
         } else {
             Toast.makeText(this, getString(R.string.invalid_email_password), Toast.LENGTH_SHORT).show();
@@ -76,11 +77,13 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding,Regis
 
     @Override
     public void showToast(String msg) {
+        hideLoading();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void openVerifyActivity(User user) {
+        hideLoading();
         Intent intent = VerificationActivity.newIntent(RegisterActivity.this)
                 .putExtra("user",user);
         startActivity(intent);

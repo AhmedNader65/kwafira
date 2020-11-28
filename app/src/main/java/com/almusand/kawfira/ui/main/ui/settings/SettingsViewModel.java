@@ -9,8 +9,10 @@ import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
+import com.almusand.kawfira.utils.CommonUtils;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,11 +21,22 @@ import retrofit2.Response;
 public class SettingsViewModel extends BaseViewModel {
 
     private MutableLiveData<User> userData = new MutableLiveData<>();
+    public MutableLiveData<String> language;
 
     public MutableLiveData<User> getUserData() {
         return userData;
     }
+    public MutableLiveData<String> getLang() {
+        return language;
+    }
+
+    public SettingsViewModel() {
+        this.language  =new MutableLiveData<>();;
+    }
+
     public void getUser(String auth){
+        language.setValue(Locale.getDefault().getDisplayLanguage());
+        Log.e("language",Locale.getDefault().getDisplayLanguage());
         RetroWeb.getClient().create(ServiceApi.class).onGetUser("Bearer "+auth).enqueue(new Callback<LoginModel>() {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {

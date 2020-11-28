@@ -43,7 +43,7 @@ public class OfferDetailsActivity extends BaseActivity<ActivityOfferDetailsBindi
         offer = (SliderModel) getIntent().getSerializableExtra("offer");
         binding.Desc.setText(offer.getDescription_ar());
         binding.title.setText(offer.getTitle_ar());
-        Picasso.get().load(offer.getImage()).into(binding.sliderImg);
+        Picasso.get().load(offer.getImage()).placeholder(R.drawable.userphoto).into(binding.sliderImg);
         viewModel.setNavigator(this);
     }
 

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.main.ui.home.HomeViewModel" />
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:nestedScrollingEnabled="true"
+    android:layout_width="match_parent"
+    android:layout_above="@+id/cart"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginBottom="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/emptyOffers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/nooffers"/>
+                <com.github.islamkhsh.CardSliderViewPager
+                    android:id="@+id/viewPager"
+                    android:layoutDirection="ltr"
+                    android:layout_width="match_parent"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_height="match_parent"
+                    app:auto_slide_time="3"
+                    android:layout_above="@id/indicator"
+                    app:cardSlider_indicator="@id/indicator" />
+
+                <com.github.islamkhsh.CardSliderIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    app:defaultIndicator="@drawable/default_dot"
+                    app:selectedIndicator="@drawable/selected_dot"
+                    app:indicatorsToShow="5" />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layoutDirection="ltr"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/cairo"
+                            android:text="Categories"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/moreCategories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="4dp"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:backgroundTint="@color/colorAccent"
+                            android:fontFamily="@font/cairo"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.showAllCategories()}"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="There's no categories yet"
+                    android:id="@+id/emptyCategories"
+                    android:fontFamily="@font/cairo"
+
+                    android:gravity="center"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layoutDirection="rtl"
+                    android:id="@+id/categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layoutDirection="ltr"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/cairo"
+                            android:text="Recent Services"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/moreServices"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/cairo"
+                            android:backgroundTint="@color/colorAccent"
+                            android:gravity="center"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:text="All"
+                            android:onClick="@{()->viewModel.showAll()}"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="There's no services yet"
+                    android:id="@+id/emptyServices"
+                    android:fontFamily="@font/cairo"
+
+                    android:gravity="center"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layoutDirection="rtl"
+                    android:id="@+id/services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/cart"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cart_price"
+                    tools:text="120 Riyal"
+                    android:gravity="left"
+
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/cairo"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Order Kwafira"
+                    android:onClick="@{()->viewModel.openMaps()}"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/cairo"/>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/count"
+                        tools:text="1"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:background="@drawable/white_rounded_transp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/cairo"/>
+                </FrameLayout>
+            </LinearLayout>
+</RelativeLayout>
+</layout>

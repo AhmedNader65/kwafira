@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.map.MapActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.kwafira.orderProcess.timer.CounterViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/paymentLayout"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/cairo"
+                android:text="Working"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="جاري العمل" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/counter_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clock_bg" />
+
+                <TextView
+                    android:id="@+id/counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/cairo"
+                    android:text="05:12:33"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/cost_TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/cairo"
+                android:text="Current cost"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/cost_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cost_TV"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/cairo"
+                android:text="٤٤.٥٠ Riyyal"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/paymentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/offerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:fontFamily="@font/cairo"
+                android:text="If you have discount code type it here"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_solid_grey"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="right"
+                    android:hint="Offer code here"
+                    android:padding="8dp" />
+
+                <Button
+                    android:id="@+id/apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorPrimary"
+                    android:fontFamily="@font/cairo"
+                    android:onClick="@{()->viewModel.apply(num.getText().toString())}"
+                    android:text="Apply"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/payBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/cairo"
+                android:text="Pay"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rateLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:visibility="gone"
+            android:background="#5EFFFFFF">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardImg"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_above="@+id/layout"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="-60dp"
+                app:cardCornerRadius="200dp">
+                <ImageView
+                    android:id="@+id/userPic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/userphoto" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:paddingTop="80dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/white_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/kwafiraName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_toLeftOf="@+id/cardCat"
+                    android:fontFamily="@font/cairo"
+                    android:textColor="#000"
+                    tools:text="فاطمة محمد علي" />
+
+                <RatingBar
+                    android:id="@+id/listitemrating"
+                    style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:rating="4"
+                    android:max="5"
+                    android:progressTint="@color/colorPrimary"
+                    android:layoutDirection="rtl"
+                    android:layout_below="@id/username"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/cardCat"
+                    android:fontFamily="@font/cairo"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="4.3" />
+                <RatingBar
+                    android:id="@+id/rateKwafiraRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rating="4"
+                    android:max="5"
+                    android:layout_marginTop="40dp"
+                    android:progressTint="@color/colorPrimary"
+                    android:layoutDirection="rtl"
+                    android:layout_below="@id/username"
+                    android:layout_centerHorizontal="true"/>
+
+              <EditText
+                  android:id="@+id/rateContent"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lines="3"
+                  android:layout_margin="16dp"
+                  android:gravity="top|right"
+                  android:background="@drawable/grey_rounded"
+                  android:hint="What do you think of this Kwafira?"
+                  android:fontFamily="@font/cairo"
+                  android:padding="4dp"
+                  />
+                <Button
+                    android:id="@+id/review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_solid_prim"
+                    android:text="Submit Review"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/cairo"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:layout_margin="16dp"
+                    />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

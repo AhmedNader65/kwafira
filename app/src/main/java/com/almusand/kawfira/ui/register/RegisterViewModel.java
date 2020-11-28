@@ -3,15 +3,21 @@ package com.almusand.kawfira.ui.register;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.almusand.kawfira.Bases.BaseViewModel;
 import com.almusand.kawfira.Models.ErrorModel;
 import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
+import com.almusand.kawfira.WebServices.MyFirebaseMessagingService;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
 import com.almusand.kawfira.utils.CommonUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,10 +43,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         if (!CommonUtils.isPhoneValid(num)) {
             return false;
         }
-        if (TextUtils.isEmpty(password)|| password.length()<8) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(password) && password.length() >= 8;
     }
     public void onServerRegisterClick() {
         getNavigator().register();
@@ -56,10 +59,11 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
                 if (response.isSuccessful()) {
                         setIsLoading(false);
                     model = response.body();
+                    getToken(model.getAccess_token());
                         Log.e("user", response.body().getResponse().toString());
-                        userLoginModelMutableLiveData.setValue((User) response.body().getResponse());
-                    ((User)model.getResponse()).setToken(model.getAccess_token());
-                        getNavigator().openVerifyActivity((User)model.getResponse());
+                        userLoginModelMutableLiveData.setValue(response.body().getResponse());
+                    model.getResponse().setToken(model.getAccess_token());
+                        getNavigator().openVerifyActivity(model.getResponse());
                 } else {
                     try {
                         Gson gson = new Gson();
@@ -83,4 +87,21 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         });
     }
 
+
+
+    private void getToken(String auth) {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        MyFirebaseMessagingService.updateUser(auth,token);
+                    }
+                });
+    }
 }

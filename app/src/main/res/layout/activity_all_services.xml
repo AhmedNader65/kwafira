@@ -38,6 +38,7 @@
             android:layout_alignParentBottom="true"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:layoutDirection="ltr"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"

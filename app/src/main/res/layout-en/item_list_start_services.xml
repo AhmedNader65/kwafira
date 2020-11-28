@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCat"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:cardCornerRadius="20dp">
+
+            <ImageView
+                android:id="@+id/imgitem_cat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/black"
+                tools:text="تيست"
+                android:gravity="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/price"
+                tools:text="١٠ ريال"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/cairo"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="120 Riyal"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/done"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_height="wrap_content"
+                android:text="Done"/>
+            <TextView
+                android:id="@+id/time"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/cairo"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="8dp"
+                android:layout_height="wrap_content"
+                tools:text="22:00"/>
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/rounded_solid_prim"
+                android:fontFamily="@font/cairo"
+                android:text="Start"
+                android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

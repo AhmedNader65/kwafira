@@ -37,7 +37,7 @@ public class ServiceDetailsViewModel extends BaseViewModel<ServiceDetailsNavigat
         }else{
             getNavigator().hideCart();
         }
-    };
+    }
 
     public void initCart(GlobalPreferences pf,int id) {
         boolean isInCart = pf.isInCart(id);

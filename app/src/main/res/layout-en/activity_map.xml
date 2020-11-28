@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.map.MapActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.map.MapActivityViewModel" />
+
+    </data>
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="end"
+    android:fitsSystemWindows="true"
+    >
+
+    <include
+        android:id="@+id/content"
+         layout="@layout/content_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:viewModel="@{((com.almusand.kawfira.ui.map.MapActivityViewModel) viewModel)}"
+        />
+    <com.shreyaspatil.material.navigationview.MaterialNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        app:itemStyle="rounded_right"
+        app:itemTextColor="@color/drawer_item"
+        app:menu="@menu/map"
+        android:layoutDirection="ltr"
+        android:background="@drawable/nave_rec"
+        app:theme="@style/mySyle.Drawer"
+        app:headerLayout="@layout/nav_header_main">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/logout"
+                android:layoutDirection="ltr"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16sp"
+                    android:gravity="center_vertical"
+                    android:text="@string/logout"
+                    android:textColor="#999"
+                    android:fontFamily="@font/cairo"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+
+                    android:src="@drawable/ic_exit" />
+            </LinearLayout>
+        </RelativeLayout>
+    </com.shreyaspatil.material.navigationview.MaterialNavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+</layout>

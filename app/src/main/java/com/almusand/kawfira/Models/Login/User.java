@@ -171,4 +171,8 @@ public class User implements Serializable {
     public String getOverall_rate() {
         return overall_rate;
     }
+
+    public void setAvailable(String available) {
+        this.available = available;
+    }
 }

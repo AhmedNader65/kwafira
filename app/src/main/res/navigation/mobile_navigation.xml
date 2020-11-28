@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_map_kwafira"
+        android:name="com.almusand.kawfira.ui.map.fragments.MapFragment"
+        android:label="@string/title_activity_maps"
+        tools:layout="@layout/content_map" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.almusand.kawfira.ui.main.ui.appointments.AppointmentsFragment"
         android:label="@string/menu_appointments"
@@ -45,4 +51,9 @@
         android:name="com.almusand.kawfira.ui.main.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.almusand.kawfira.ui.main.ui.about.AboutUsFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_aboutus" />
 </navigation>

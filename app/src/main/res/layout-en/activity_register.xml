@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.mindorks.framework.mvvm.ui.login.LoginActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.register.RegisterViewModel" />
+
+    </data>
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="Create account"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/cairo"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:fontFamily="@font/cairo"
+                    android:text="in Kwafira app"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="16dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="Full name"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/cairo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    android:background="@color/edit_color"
+                    />
+
+                <TextView
+                    android:id="@+id/code"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/cairo"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:background="@color/edit_color"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="+996"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    android:gravity="center"
+                    />
+
+                <EditText
+                    android:id="@+id/num"
+                    android:fontFamily="@font/cairo"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:hint="Phone number"
+                    app:layout_constraintBottom_toBottomOf="@+id/code"
+                    app:layout_constraintStart_toEndOf="@+id/code"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/code"
+                    android:background="@color/edit_color"
+                    />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:hint="Email"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/cairo"
+                    app:layout_constraintStart_toStartOf="@+id/code"
+                    app:layout_constraintEnd_toEndOf="@+id/num"
+                    app:layout_constraintTop_toBottomOf="@+id/num"
+                    android:background="@color/edit_color"
+                    />
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="at least 8 Characters password"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/cairo"
+
+                    app:layout_constraintEnd_toEndOf="@+id/email"
+                    app:layout_constraintStart_toStartOf="@+id/email"
+                    app:layout_constraintTop_toBottomOf="@+id/email"
+                    android:background="@color/edit_color"
+                    />
+                <EditText
+                    android:id="@+id/password2"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="Confirm password"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:fontFamily="@font/cairo"
+                    app:layout_constraintEnd_toEndOf="@+id/password"
+                    app:layout_constraintStart_toStartOf="@+id/password"
+                    app:layout_constraintTop_toBottomOf="@+id/password"
+                    android:background="@color/edit_color"
+                    />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/colorPrimary"
+                    android:fontFamily="@font/cairo"
+                    android:text="Sign up"
+                    android:textColor="#FFF"
+                    android:onClick="@{() -> viewModel.onServerRegisterClick()}"
+                    app:layout_constraintEnd_toEndOf="@+id/password2"
+                    app:layout_constraintStart_toStartOf="@+id/password2"
+                    app:layout_constraintTop_toBottomOf="@+id/password2" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="Already have account? Login"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:fontFamily="@font/cairo"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12dp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+</layout>

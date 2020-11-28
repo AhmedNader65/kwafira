@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_map_kwafira">
+
+
+    <fragment
+        android:id="@+id/nav_map_kwafira"
+        android:name="com.almusand.kawfira.ui.map.fragments.MapFragment"
+        android:label="@string/title_activity_maps"
+        tools:layout="@layout/content_map" >
+        <argument
+            android:name="x"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.almusand.kawfira.ui.main.ui.appointments.AppointmentsFragment"
+        android:label="@string/menu_appointments"
+        tools:layout="@layout/fragment_appointments" />
+    <fragment
+        android:id="@+id/nav_orders"
+        android:name="com.almusand.kawfira.ui.main.ui.orders.OrdersParentFragment"
+        android:label="@string/menu_orders"
+        tools:layout="@layout/fragment_orders" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_slideshow"-->
+<!--        android:name="com.almusand.kawfira.ui.main.ui.slideshow.SlideshowFragment"-->
+<!--        android:label="@string/menu_slideshow"-->
+<!--        tools:layout="@layout/fragment_slideshow" />-->
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="com.almusand.kawfira.ui.main.ui.suggestions.SuggestionsFragment"
+        android:label="@string/menu_suggestions"
+        tools:layout="@layout/fragment_suggestions" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.almusand.kawfira.ui.main.ui.settings.SettingsFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.almusand.kawfira.ui.main.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+</navigation>

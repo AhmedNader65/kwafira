@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.almusand.kawfira.Bases.BaseViewModel;
 import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.Models.MsgModel;
+import com.almusand.kawfira.Models.orders.reservations.OrderModel;
+import com.almusand.kawfira.Models.orders.reservations.OrdersResModel;
 import com.almusand.kawfira.WebServices.RetroWeb;
 import com.almusand.kawfira.WebServices.ServiceApi;
 import com.almusand.kawfira.utils.CommonUtils;
@@ -25,6 +27,7 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
     MutableLiveData<User> userLoginModelMutableLiveData = new MutableLiveData<>();
     User model;
     boolean bottomSheet = false;
+
     public boolean isEmailAndPasswordValid(String num, String password) {
         // validate email and password
         if (TextUtils.isEmpty(num)) {
@@ -33,10 +36,7 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
         if (!CommonUtils.isPhoneValid(num)) {
             return false;
         }
-        if (TextUtils.isEmpty(password)) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(password);
     }
 
     public void toAddress() {
@@ -46,15 +46,17 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
     public void onCallClicked() {
 
     }
+
     public void onChatClicked() {
 
     }
+
     public void onKwafiraProfileClicked() {
 
     }
 
     public void confirmOrSchedule(int i) {
-        switch (i){
+        switch (i) {
             case 0:
                 getNavigator().scheduling();
                 break;
@@ -73,20 +75,24 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
         this.bottomSheet = bottomSheet;
     }
 
-    public void shouldShow(){
-        if(!isBottomSheet()){
+    public void shouldShow() {
+        if (!isBottomSheet()) {
             setBottomSheet(true);
             getNavigator().showBottomSheet();
         }
     }
 
     public void postOrder(String auth, String lat, String lon, ArrayList<String> services, String address, String homeNum, String apartNum) {
-        RetroWeb.getClient().create(ServiceApi.class).PostOrder("Bearer "+auth,address,apartNum,homeNum,lon,lat,services).enqueue(new Callback<MsgModel>() {
+        Log.e("ad apa homeN lon lat", address+">> "+  apartNum+">> "+ homeNum+">> "+ lon+">> "+ lat);
+        RetroWeb.getClient().create(ServiceApi.class).PostOrder("Bearer " + auth, address, apartNum, homeNum, lon, lat, services).enqueue(new Callback<OrdersResModel>() {
             @Override
-            public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
+            public void onResponse(Call<OrdersResModel> call, Response<OrdersResModel> response) {
                 if (response.isSuccessful()) {
-                    MsgModel model = response.body();
-                    String msg = model.getMessage();
+                    OrdersResModel model = response.body();
+                    OrderModel order = model.getOrder();
+                    Log.e("ORDER << ",order.toString());
+                    Log.e("ORDER address<< ",order.getAddress());
+                    Log.e("ORDER address<< ",order.getAppartment_number());
 //                    servicesLiveData.setValue(modelList);
 
                     setIsLoading(false);
@@ -102,9 +108,9 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
             }
 
             @Override
-            public void onFailure(Call<MsgModel> call, Throwable t) {
-                Log.e("response", ""+t.getCause());
-                Log.e("response", ""+t.getMessage());
+            public void onFailure(Call<OrdersResModel> call, Throwable t) {
+                Log.e("response", "" + t.getCause());
+                Log.e("response", "" + t.getMessage());
 
                 setIsLoading(false);
 
@@ -115,15 +121,15 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
 
     public void postReservation(String auth, String date, String lat, String lon, ArrayList<String> services, String address, String homeNum, String apartNum) {
 
-        Log.e("Auth to post res. >>>",auth+"");
-        RetroWeb.getClient().create(ServiceApi.class).PostReservation("Bearer "+auth,date,lon,lat,address,apartNum,homeNum,services).enqueue(new Callback<MsgModel>() {
+        Log.e("Auth to post res. >>>", auth + "");
+        RetroWeb.getClient().create(ServiceApi.class).PostReservation("Bearer " + auth, date, lon, lat, address, apartNum, homeNum, services).enqueue(new Callback<MsgModel>() {
             @Override
             public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
                 if (response.isSuccessful()) {
                     MsgModel model = response.body();
                     String msg = model.getMessage();
 //                    servicesLiveData.setValue(modelList);
-
+                    getNavigator().resDone();
                     setIsLoading(false);
                 } else {
                     try {
@@ -145,13 +151,42 @@ public class MapActivityViewModel extends BaseViewModel<MapsActivityNavigator> {
 
             @Override
             public void onFailure(Call<MsgModel> call, Throwable t) {
-                Log.e("response", ""+t.getCause());
-                Log.e("response", ""+t.getMessage());
+                Log.e("response", "" + t.getCause());
+                Log.e("response", "" + t.getMessage());
 
                 setIsLoading(false);
 
             }
 
         });
+    }
+
+    public void logout(String auth) {
+        RetroWeb.getClient().create(ServiceApi.class).logout("Bearer " + auth).enqueue(new Callback<MsgModel>() {
+            @Override
+            public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
+                if (response.isSuccessful()) {
+                    Log.e("response", response.toString());
+                    MsgModel model = response.body();
+                    getNavigator().successfullyLogout();
+                } else {
+                    try {
+                        Log.e("error", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MsgModel> call, Throwable t) {
+
+                setIsLoading(false);
+
+            }
+
+        });
+
     }
 }

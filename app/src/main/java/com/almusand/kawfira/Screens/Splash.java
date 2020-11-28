@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.almusand.kawfira.R;
+import com.almusand.kawfira.kwafira.KwafiraServicesChoices;
 import com.almusand.kawfira.kwafira.home.KwafiraMainActivity;
 import com.almusand.kawfira.kwafira.identity.VerifyIdActivity;
 import com.almusand.kawfira.kwafira.reviewing.ReviewingActivity;
@@ -13,29 +14,33 @@ import com.almusand.kawfira.ui.kwafiraReviewProfile.KwafiraRevProfile;
 import com.almusand.kawfira.ui.login.LoginActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.map.MapActivity;
+import com.almusand.kawfira.utils.CommonUtils;
 import com.almusand.kawfira.utils.GlobalPreferences;
 
 public class Splash extends AppCompatActivity {
 
     Thread splash_thread;
-
+    GlobalPreferences gp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.splash);
 
 //        threead();
+        gp = new GlobalPreferences(this);
 
+        gp.clearIds();
+        CommonUtils.setLocale(this,gp.getLanguage());
         Intent i;
-        if ((new GlobalPreferences(getApplicationContext())).getUSER_Logged()) {
-            if ((new GlobalPreferences(getApplicationContext())).getUserRole().equals("client"))
+        if (gp.getUSER_Logged()) {
+            if (gp.getUserRole().equals("client"))
                 i = new Intent(Splash.this, HomeActivity.class);
-            else if (new GlobalPreferences(getApplicationContext()).isKawfiraVerfied())
+            else if (gp.isKawfiraVerfied())
                 i = new Intent(Splash.this, KwafiraMainActivity.class);
-            else if (new GlobalPreferences(getApplicationContext()).isCertSent())
+            else if (gp.isCertSent())
                 i = new Intent(Splash.this, ReviewingActivity.class);
             else
-                i = new Intent(Splash.this, VerifyIdActivity.class);
+                i = new Intent(Splash.this, KwafiraServicesChoices.class);
         } else {
             i = new Intent(Splash.this, LoginActivity.class);
         }
@@ -58,8 +63,8 @@ public class Splash extends AppCompatActivity {
 //                        waited += 100;
 //                    }
 //                    Intent i;
-//                    if ((new GlobalPreferences(getApplicationContext())).getUSER_Logged()) {
-//                        if ((new GlobalPreferences(getApplicationContext())).getUserRole().equals("client"))
+//                    if ((gp).getUSER_Logged()) {
+//                        if ((gp).getUserRole().equals("client"))
 //                            i = new Intent(Splash.this, HomeActivity.class);
 //                        else
 //                            i = new Intent(Splash.this, VerifyIdActivity.class);

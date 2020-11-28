@@ -29,6 +29,7 @@ public class ServicesModel implements Serializable {
     @Expose
     private String description_ar;
 
+
     @SerializedName("description_en")
     @Expose
     private String description_en;
@@ -130,4 +131,5 @@ public class ServicesModel implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 }

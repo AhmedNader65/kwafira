@@ -26,6 +26,8 @@ import com.almusand.kawfira.Bases.BaseViewModel;
 import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ActivityMainKwafiraBinding;
+import com.almusand.kawfira.kwafira.home.ui.home.status.StatusNavigator;
+import com.almusand.kawfira.ui.login.LoginActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.utils.GlobalPreferences;
 import com.github.islamkhsh.BR;
@@ -34,7 +36,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
-public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding, HomeActivityViewModel> {
+public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding, HomeActivityViewModel>  implements StatusNavigator {
     GlobalPreferences gp ;
     ActivityMainKwafiraBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
@@ -69,7 +71,7 @@ public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding
         binding = getViewDataBinding();
         showLoading();
         gp = new GlobalPreferences(this);
-
+        baseViewModel.setNavigator(this);
         baseViewModel.getUserData().observe(this,userObserver);
         baseViewModel.getUser(gp.getUserAuth());
         gp.storeKawfiraVerfied();
@@ -88,6 +90,26 @@ public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding
         userEmail = header.findViewById(R.id.email);
 
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        binding.logout.setOnClickListener(v -> {
+            // LOGOUT
+            logout();
+        });
+
+        binding.navView.setNavigationItemSelectedListener(menuItem -> {
+            int id=menuItem.getItemId();
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            //This is for maintaining the behavior of the Navigation view
+            NavigationUI.onNavDestinationSelected(menuItem,navController);
+            //This is for closing the drawer after acting on it
+            binding.drawerLayout.closeDrawer(GravityCompat.END);
+            return true;
+        });
+    }
+
+    private void logout() {
+        Log.e("clicked","logout");
+        baseViewModel.logout(gp.getUserAuth());
 
     }
 
@@ -113,7 +135,7 @@ public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding
 
     public void toogle(View view)
     {
-        binding.drawerLayout.openDrawer(GravityCompat.START);
+        binding.drawerLayout.openDrawer(GravityCompat.END);
     }
 
 
@@ -122,5 +144,34 @@ public class KwafiraMainActivity extends BaseActivity<ActivityMainKwafiraBinding
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void updatedSuccessfuly(User available) {
+
+    }
+
+    @Override
+    public void revertAndShowToast(String msg) {
+
+    }
+
+    @Override
+    public void update(boolean isChecked) {
+
+    }
+
+    @Override
+    public void dontUpdate() {
+
+    }
+
+    @Override
+    public void successfullyLogout() {
+        startActivity(LoginActivity.newIntent(this));
+        gp.storeLogged(false);
+
+        gp.clearSharedPreferences();
+        this.finish();
     }
 }

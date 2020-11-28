@@ -12,6 +12,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="24dp"
+        android:layout_alignParentLeft="true"
         app:srcCompat="@drawable/toogle"
         android:onClick="toogle"
         />

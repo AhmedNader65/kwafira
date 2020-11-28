@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import com.almusand.kawfira.Models.Login.User;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GlobalPreferences {
 
+    private static final String KWAFIRA_LANGUAGE = "language";
     Context context;
     final static String PREFS_NAME = "settings";
     final static String USER_ID = "id";
@@ -89,12 +91,17 @@ public class GlobalPreferences {
     }
 
     public void saveInCart(int id){
-        ArrayList<String> ids = tiny.getListString("ids");
+        ArrayList<String> ids =   tiny.getListString("ids");
         if(ids==null){
             ids = new ArrayList<>();
         }
-
-        ids.add(id+"");
+        boolean hasId = false;
+        for(String idddd : ids){
+            if(idddd.equals("id"))
+                hasId = true;
+        }
+        if(!hasId)
+            ids.add(id+"");
         tiny.putListString("ids",ids);
         prefsEditor.putBoolean(Service_ID+id,true);
         prefsEditor.commit();
@@ -126,6 +133,16 @@ public class GlobalPreferences {
     }
     public ArrayList<String> getAllIds(){
         return tiny.getListString("ids");
+    }
+    public void clearIds(){
+        for(String id:getAllIds()){
+            prefsEditor.putBoolean(Service_ID+id,false);
+        }
+
+        prefsEditor.putInt(CART_Counter,0);
+        prefsEditor.putInt(CART_Price, 0);
+         tiny.putListString("ids",new ArrayList<>());
+        prefsEditor.commit();
     }
 
     public void storeEmail(String email) {
@@ -163,4 +180,19 @@ public class GlobalPreferences {
     public boolean isAvailable() {
         return  prefs.getBoolean(KWAFIRA_Available,false);
     }
+
+    public void clearSharedPreferences(){
+        prefsEditor.clear();
+        prefsEditor.commit();
+    }
+
+    public void storeLanguage(String s) {
+        prefsEditor.putString(KWAFIRA_LANGUAGE,s);
+        prefsEditor.commit();
+    }
+
+    public String getLanguage(){
+        return prefs.getString(KWAFIRA_LANGUAGE, context.getResources().getConfiguration().locale.getLanguage());
+    }
+
 }

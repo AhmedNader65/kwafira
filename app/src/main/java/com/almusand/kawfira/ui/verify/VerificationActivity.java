@@ -14,6 +14,7 @@ import com.almusand.kawfira.Models.Login.LoginModel;
 import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ActivityVerificationBinding;
+import com.almusand.kawfira.kwafira.KwafiraServicesChoices;
 import com.almusand.kawfira.kwafira.identity.VerifyIdActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.resetPassword.reset.ResetPasswordActivity;
@@ -53,7 +54,6 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
             isReset = getIntent().getBooleanExtra("reset", false);
         } catch (Exception e) {
         }
-        ;
 
         user = (User) getIntent().getSerializableExtra("user");
         binding = getViewDataBinding();
@@ -82,11 +82,15 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void verifyFailed() {
+
+        hideLoading();
         binding.etOtp.setText("");
     }
 
     @Override
     public void showToast(String msg) {
+
+        hideLoading();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -105,6 +109,7 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void openMainActivity(LoginModel model) {
+        hideLoading();
         gp.storeUserInfo(model.getResponse(), model.getAccess_token());
         Intent intent;
         intent = HomeActivity.newIntent(VerificationActivity.this)
@@ -117,11 +122,12 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void openVerifyIdActivity(LoginModel model) {
-        (new GlobalPreferences(this)).storeUserInfo((User) model.getResponse(),model.getAccess_token());
+        hideLoading();
+        (new GlobalPreferences(this)).storeUserInfo(model.getResponse(),model.getAccess_token());
         (new GlobalPreferences(this)).storeLogged(true);
         gp.storeUserInfo(model.getResponse(), model.getAccess_token());
         Intent intent;
-        intent = VerifyIdActivity.newIntent(VerificationActivity.this)
+        intent = KwafiraServicesChoices.newIntent(VerificationActivity.this)
                 .putExtra("user", model.getResponse());
         startActivity(intent);
         finish();
@@ -129,6 +135,7 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void openResetActivity(String code) {
+        hideLoading();
         Intent intent = ResetPasswordActivity.newIntent(VerificationActivity.this)
                 .putExtra("code", code);
         startActivity(intent);
@@ -136,6 +143,7 @@ public class VerificationActivity extends BaseActivity<ActivityVerificationBindi
 
     @Override
     public void SendVerifyRequest(String code) {
+        showLoading();
         viewModel.sendVerify(code, user.getToken());
 
     }

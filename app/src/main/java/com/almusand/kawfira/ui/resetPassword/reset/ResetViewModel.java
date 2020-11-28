@@ -73,10 +73,7 @@ public class ResetViewModel extends BaseViewModel<ResetNavigator> {
 
     public boolean isPasswordValid( String password) {
         // validate email and password
-        if (TextUtils.isEmpty(password)|| password.length()<8) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(password) && password.length() >= 8;
     }
 
 }

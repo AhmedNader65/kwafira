@@ -50,7 +50,7 @@ public class ServiceDetailsActivity extends BaseActivity<ActivityServiceDetailsB
         binding.Desc.setText(service.getDescription_ar());
         binding.title.setText(service.getTitle_ar());
         binding.initprice.setText(service.getInitial_price()+" ريال");
-        Picasso.get().load(service.getImage()).into(binding.sliderImg);
+        Picasso.get().load(service.getImage()).placeholder(R.drawable.userphoto).into(binding.sliderImg);
         viewModel.setNavigator(this);
 
         viewModel.initCart(pf,service.getId());

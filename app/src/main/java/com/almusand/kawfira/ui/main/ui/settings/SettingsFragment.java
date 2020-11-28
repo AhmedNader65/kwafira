@@ -13,12 +13,15 @@ import com.almusand.kawfira.Models.Login.User;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.FragmentSettingsBinding;
 import com.almusand.kawfira.ui.main.HomeActivity;
+import com.almusand.kawfira.ui.main.ui.editingActivities.lang.ChangeLanguageActivity;
 import com.almusand.kawfira.ui.main.ui.editingActivities.email.ChangeEmailActivity;
 import com.almusand.kawfira.ui.main.ui.editingActivities.name.ChangeNameAndImgActivity;
 import com.almusand.kawfira.ui.main.ui.editingActivities.password.ChangePasswordActivity;
 import com.almusand.kawfira.utils.GlobalPreferences;
 import com.github.islamkhsh.BR;
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 public class SettingsFragment extends BaseFragment<FragmentSettingsBinding,SettingsViewModel> {
 
@@ -62,18 +65,22 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding,Setti
         binding.editPassword.setOnClickListener(v -> {
             getActivity().startActivity(new Intent(getContext(), ChangePasswordActivity.class));
         });
+        binding.editLanguage.setOnClickListener(v -> {
+            getActivity().startActivity(new Intent(getContext(), ChangeLanguageActivity.class));
+        });
     }
 
     private String img,name;
     private String email;
     Observer<User> userObserver = user -> {
+        binding.language.setText(gp.getLanguage().equals("en")?"English":"العربية");
         this.img = user.getImage();
         this.name=user.getName();
         this.email=user.getEmail();
         binding.email.setText(user.getEmail());
         binding.username.setText(user.getName());
         binding.phone.setText(user.getPhone());
-        Picasso.get().load(user.getImage()).into(binding.profileImg);
+        Picasso.get().load(user.getImage()).placeholder(R.drawable.userphoto).into(binding.profileImg);
     };
 
     public void refresh() {

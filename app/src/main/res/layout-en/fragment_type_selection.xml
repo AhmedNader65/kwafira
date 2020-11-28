@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.map.fragments.type.TypeViewModel" />
+    </data>
+    <LinearLayout android:visibility="visible"
+    android:id="@+id/userChoice_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_top"
+    android:orientation="vertical"
+    android:paddingTop="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:padding="4dp"
+        android:fontFamily="@font/cairo"
+        android:text="Notice: All prices are calculated approximately and might be different" />
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="#999" />
+
+    <RelativeLayout
+        android:id="@+id/ordinary_container"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:background="#34A23F87"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ordinary_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kwafira"
+            android:textColor="@color/black"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="@font/cairo"
+            android:layout_marginLeft="50dp"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_below="@id/ordinary_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="in 30 minutes"
+            android:textSize="8sp"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="@font/cairo"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="55 Riyal"
+            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/cairo"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/confirm_selection"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/cairo"
+            android:layout_marginRight="10dp"
+            android:text="Confirm order"
+            android:textColor="#FFF" />
+        <ImageView
+            android:id="@+id/schedule"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:src="@drawable/schedule"
+            android:fontFamily="@font/cairo"
+            android:textColor="#FFF" />
+    </LinearLayout>
+</LinearLayout>
+
+</layout>

@@ -21,4 +21,7 @@ public interface MapsActivityNavigator {
     void confirm();
 
 
+    void successfullyLogout();
+
+    void resDone();
 }

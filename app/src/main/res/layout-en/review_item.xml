@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.almusand.kawfira.ui.kwafiraReviewProfile.ReviewViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/userPic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/userphoto"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            tools:text="مي طارق سليم"
+            android:text="@{viewModel.author}"
+            android:layout_toRightOf="@+id/userPic"
+            android:layout_marginTop="30dp"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"/>
+        <RatingBar
+            android:id="@+id/listitemrating"
+            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:rating="4"
+            android:progressBackgroundTint="@color/colorPrimary"
+            android:max="5"
+            android:layout_alignLeft="@id/username"
+            android:layoutDirection="ltr"
+            android:progressTint="@color/colorPrimary"
+            android:layout_below="@id/username"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            tools:text="7/7/1994"
+            android:text="@{viewModel.date}"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="20dp"
+            android:textSize="12sp"
+            android:layout_alignBottom="@id/username"
+            android:textColor="@color/black"
+            android:fontFamily="@font/cairo"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reviewText"
+            android:layout_marginRight="16dp"
+            android:text="@{viewModel.content}"
+            tools:text="هذا النص يوضح تقييم العملاء للكوفيرة ..هذا النص يوضح تقييم العملاء للكوفيرة ..هذا النص يوضح تقييم العملاء للكوفيرة"
+            android:textSize="12sp"
+            android:layout_below="@id/listitemrating"
+            android:layout_alignLeft="@id/listitemrating"
+            android:fontFamily="@font/cairo"/>
+    </RelativeLayout>
+</layout>

@@ -9,17 +9,13 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.almusand.kawfira.Bases.BaseFragment;
@@ -31,21 +27,17 @@ import com.github.islamkhsh.BR;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 import static android.content.Context.LOCATION_SERVICE;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class MapFragment extends BaseFragment<FragHomeBinding, MapViewModel> implements OnMapReadyCallback, MapsNavigator {
 
@@ -54,14 +46,20 @@ public class MapFragment extends BaseFragment<FragHomeBinding, MapViewModel> imp
     FragHomeBinding binding;
     MapViewModel viewModel;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
-    private GoogleMap map;
+    public GoogleMap map;
     private boolean permissionDenied;
     onAddressConfirmed mListner;
     String latStr,lngStr;
+    int hasOrder = 0;
 
-
-    public MapFragment(onAddressConfirmed mListner) {
+    public MapFragment(onAddressConfirmed mListner,int hasOrder) {
         this.mListner = mListner;
+        this.hasOrder = hasOrder;
+
+    }
+
+    public MapFragment() {
+
     }
 
     @Override
@@ -81,6 +79,18 @@ public class MapFragment extends BaseFragment<FragHomeBinding, MapViewModel> imp
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try{
+            Bundle bundle = getArguments();
+            this.hasOrder = bundle.getInt("x");
+
+        }catch (Exception e){
+
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
@@ -88,49 +98,57 @@ public class MapFragment extends BaseFragment<FragHomeBinding, MapViewModel> imp
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
 
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+
+
         try {
             enableMyLocation();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if(hasOrder!=0) {
+            map.getUiSettings().setAllGesturesEnabled(false);
+        }else {
+            map.setOnMapClickListener(latLng -> {
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pinaddressicon));
+                markerOptions.position(latLng);
 
-        map.setOnMapClickListener(latLng -> {
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pinaddressicon));
-            markerOptions.position(latLng);
+                map.clear();
 
-            map.clear();
+                Geocoder gcd = new Geocoder(getContext(), new Locale("ar"));
+                List<Address> addresses = null;
+                try {
+                    addresses = gcd.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    binding.address.setText(addresses.get(0).getAddressLine(0).replaceAll("\\d", "").replace("Unnamed Road,", ""));
+                    latStr = latLng.latitude + "";
+                    lngStr = latLng.longitude + "";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (addresses != null) {
+                    if (addresses.size() > 0) {
+                        markerOptions.title(addresses.get(0).getLocality());
 
-            Geocoder gcd = new Geocoder(getContext(), new Locale("ar"));
-            List<Address> addresses = null;
-            try {
-                addresses = gcd.getFromLocation(latLng.latitude, latLng.longitude, 1);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
-                binding.address.setText(addresses.get(0).getAddressLine(0).replaceAll("\\d", "").replace("Unnamed Road,",""));
-                latStr = latLng.latitude+"";
-                lngStr = latLng.longitude+"";
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (addresses.size() > 0) {
-                markerOptions.title(addresses.get(0).getLocality());
+                    } else {
+                        // do your stuff
+                    }
+                }
+                Marker locationMarker = map.addMarker(markerOptions);
+                locationMarker.setDraggable(true);
+                locationMarker.showInfoWindow();
 
-            } else {
-                // do your stuff
-            }
-            Marker locationMarker = map.addMarker(markerOptions);
-            locationMarker.setDraggable(true);
-            locationMarker.showInfoWindow();
-
-        });
+            });
+        }
     }
 
     /**
@@ -224,19 +242,29 @@ public class MapFragment extends BaseFragment<FragHomeBinding, MapViewModel> imp
     }
 
     @Override
-    public void showType() {
-        mListner.onAddressClicked(binding.address.getText().toString(),binding.home.getText().toString(),binding.apartment.getText().toString(),latStr,lngStr);
+    public void showType(String address, String homeNum, String apartNum) {
+        map.getUiSettings().setAllGesturesEnabled(false);
+        viewModel.confirmAddress(binding.address.getText().toString(),binding.home.getText().toString(),binding.apartment.getText().toString(),latStr,lngStr);
         binding.userChoiceDialog.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showType(String address, String homeNum, String apartNum, String lat, String lng) {
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         binding.userChoiceDialog.setVisibility(View.VISIBLE);
-
+        if(hasOrder!=0){
+            binding.userChoiceDialog.setVisibility(View.GONE);
+            Log.e("has order",hasOrder+"");
+        }
     }
 
     public interface onAddressConfirmed{
+
         void onAddressClicked(String address,String homeNum,String apart,String lat,String lng);
     }
 }

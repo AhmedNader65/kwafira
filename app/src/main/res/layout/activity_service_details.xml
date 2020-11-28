@@ -75,6 +75,7 @@
             android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
+            android:layoutDirection="ltr"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:orientation="horizontal">

@@ -23,7 +23,6 @@ import retrofit2.Response;
 public class OrderViewModel extends BaseViewModel<Navigator> {
 
     public final ObservableField<String> orderNum;
-    public final ObservableField<String> kwafiraName;
     public final ObservableField<String> status;
     public final ObservableField<String> price;
     public final ObservableField<String> date;
@@ -34,17 +33,16 @@ public class OrderViewModel extends BaseViewModel<Navigator> {
 
     private final OrderModel model;
 
-    public OrderViewModel(OrderModel model) {
+    public OrderViewModel(String lang,OrderModel model) {
         this.model = model;
         String n = "رقم الطلب   "+model.getId();
         orderNum = new ObservableField<>(n);
-        kwafiraName = new ObservableField<>(model.getKwafera()!=null?model.getKwafera().getName():"جاري البحث عن كوافيرة");
-        rate = new ObservableField<>(model.getKwafera()!=null?model.getKwafera().getOverall_rate()==null?"لا يوجد تقييم":getRate(model.getKwafera().getOverall_rate()):"");
+        rate = new ObservableField<>(model.getKwafera()!=null?String.format("%.2f",Float.valueOf(model.getKwafera().getOverall_rate()))==null?"لا يوجد تقييم":getRate(model.getKwafera().getOverall_rate()):"");
         status = new ObservableField<>(model.getStatus());
         firstService = new ObservableField<>(model.getServices_data()[0].getTitle_ar());
         price = new ObservableField<>(model.getPrice());
-        date = new ObservableField<>(getDateFormatted(model.getUpdated_at().substring(0,19).replace("T"," ")));
-        time = new ObservableField<>("الساعة " + getTimeFormatted(model.getUpdated_at().replace("T"," ")));
+        date = new ObservableField<>(getDateFormatted(lang,model.getUpdated_at().substring(0,19).replace("T"," ")));
+        time = new ObservableField<>("الساعة " + getTimeFormatted(lang,model.getUpdated_at().replace("T"," ")));
     }
 
     private String getRate(String overall_rate) {
@@ -88,25 +86,29 @@ public class OrderViewModel extends BaseViewModel<Navigator> {
         });
     }
 
-    public String getDateFormatted(String date) {
+    public String getDateFormatted(String lang,String date) {
         try {
             Date date1 = CommonUtils.stringToDate(date);
             String dayOfTheWeek = (String) DateFormat.format("EEEE", date1); // Thursday
             String month = (String) DateFormat.format("MMM", date1); // Thursday
             String day = (String) DateFormat.format("dd", date1); // Thursday
-            return CommonUtils.getDateInAr(dayOfTheWeek) + " " + day + " " + CommonUtils.getMonthInAr(month);
+            if(lang.equals("en")) {
+                return dayOfTheWeek + " " + day + " " + month;
+            }else {
+                return CommonUtils.getDateInAr(dayOfTheWeek) + " " + day + " " + CommonUtils.getMonthInAr(month);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return date;
     }
 
-    public String getTimeFormatted(String date) {
+    public String getTimeFormatted(String lang,String date) {
         try {
             Date date1 = CommonUtils.stringToDate(date);
             String timeOfDay = (String) DateFormat.format("hh:mm", date1); // Thursday
             String AMOrPM = (String) DateFormat.format("a", date1); // Thursday
-            return timeOfDay + " " + CommonUtils.getAMORPMInAR(AMOrPM);
+            return timeOfDay + " " + CommonUtils.getAMORPMInAR(lang,AMOrPM);
         } catch (ParseException e) {
             e.printStackTrace();
         }

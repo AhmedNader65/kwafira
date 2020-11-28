@@ -16,13 +16,17 @@ import com.almusand.kawfira.Bases.BaseFragment;
 import com.almusand.kawfira.Models.categories.CategoriesModel;
 import com.almusand.kawfira.Models.categories.ServicesModel;
 import com.almusand.kawfira.Models.offers.SliderModel;
+import com.almusand.kawfira.Models.orders.reservations.OrderModel;
 import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.FragmentHomeBinding;
 import com.almusand.kawfira.ui.allServices.ServicesActivity;
+import com.almusand.kawfira.ui.counterActivity.CounterActivity;
 import com.almusand.kawfira.ui.main.HomeActivity;
 import com.almusand.kawfira.ui.main.ui.home.adapter.CategoriesAdapter;
 import com.almusand.kawfira.ui.main.ui.home.adapter.ServicesAdapter;
 import com.almusand.kawfira.ui.main.ui.home.adapter.SliderAdapter;
+import com.almusand.kawfira.ui.main.ui.orders.CurrentOrdersNavigator;
+import com.almusand.kawfira.ui.main.ui.orders.OrdersViewModel;
 import com.almusand.kawfira.ui.map.MapActivity;
 import com.almusand.kawfira.utils.GlobalPreferences;
 import com.google.gson.Gson;
@@ -30,12 +34,13 @@ import com.google.gson.Gson;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel>  implements ServicesAdapter.onCartListener,HomeNavigator{
+public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel>  implements ServicesAdapter.onCartListener,HomeNavigator, CurrentOrdersNavigator {
     List<ServicesModel> servicesModels;
     List<CategoriesModel> categoriesModels;
     HomeViewModel homeViewModel;
     GlobalPreferences pf;
     FragmentHomeBinding binding;
+    OrdersViewModel ordersViewModel;
     @Override
     public int getBindingVariable() {
         return BR.viewModel;
@@ -57,6 +62,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         super.onViewCreated(view, savedInstanceState);
         binding = getViewDataBinding();
         homeViewModel.setNavigator(this);
+        ordersViewModel =  ViewModelProviders.of(requireActivity()).get(OrdersViewModel.class);
+        ordersViewModel.setNavigator(this);
         pf = new GlobalPreferences(getContext());
         homeViewModel.getOffers().observe(this, offerListUpdateObserver);
         homeViewModel.getCategories().observe(this, categoriesListUpdateObserver);
@@ -64,8 +71,20 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         homeViewModel.initOffers(pf.getUserAuth());
         homeViewModel.initCategories();
         homeViewModel.initServices();
+        Log.e("HOME","HOMEEE");
+        ordersViewModel.initOrders(new GlobalPreferences(getContext()).getUserAuth(), "incomplete");
+        try {
+            ordersViewModel.getResLiveData().observe(getViewLifecycleOwner(), resListUpdateObserver);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
+
+
+    Observer<List<OrderModel>> resListUpdateObserver = resList -> {
+        Log.e("LOGGG",resList.size()+"");
+    };
 
 
     Observer<List<SliderModel>> offerListUpdateObserver = offersList -> {
@@ -75,36 +94,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         adapter.renewItems(offersList);
         SliderModel model =new SliderModel();
         binding.emptyOffers.setVisibility(View.GONE);
-        model.setId(2);
-        model.setActive(1);
-        model.setCoupon("432432");
-        model.setDescription_ar("هاي هاي هاي");
-        model.setDescription_en("fdsfds");
-        model.setTitle_ar("العرض رقم ١");
-        model.setTitle_en("offer num 1");
-        model.setImage("https://en.es-static.us/upl/2018/12/comet-wirtanen-Jack-Fusco-dec-2018-Anza-Borrego-desert-CA-e1544613895713.jpg");
-        adapter.addItem(model);
-        model =new SliderModel();
-        model.setId(3);
-        model.setActive(1);
-        model.setCoupon("432432");
-        model.setDescription_ar("هاي هاي هاي");
-        model.setDescription_en("fdsfds");
-        model.setTitle_ar("العرض رقم 2");
-        model.setTitle_en("offer num 2");
-        model.setImage("https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg");
-        adapter.addItem(model);
-        model =new SliderModel();
-        model.setId(5);
-        model.setActive(1);
-        model.setCoupon("432432");
-        model.setDescription_ar("هاي هاي هاي");
-        model.setDescription_en("fdsfds");
-        model.setTitle_ar("العرض رقم 3");
-        model.setTitle_en("offer num 3");
-        model.setImage("https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg");
-        adapter.addItem(model);
-        Log.e("Here","changed");
     };
     Observer<List<CategoriesModel>> categoriesListUpdateObserver = categoriesList -> {
         categoriesModels = categoriesList;
@@ -116,28 +105,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         binding.categories.setAdapter(adapter);
         adapter.renewItems(categoriesList);
 
-        CategoriesModel model =new CategoriesModel();
-        model.setId(2);
-        model.setActive(true);
-        model.setName_ar("العرض رقم ١");
-        model.setName_en("offer num 1");
-        model.setImage("https://en.es-static.us/upl/2018/12/comet-wirtanen-Jack-Fusco-dec-2018-Anza-Borrego-desert-CA-e1544613895713.jpg");
-        adapter.addItem(model);
-        model =new CategoriesModel();
-        model.setId(3);
-        model.setActive(true);
-        model.setName_ar("العرض رقم 2");
-        model.setName_en("offer num 2");
-        model.setImage("https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg");
-        adapter.addItem(model);
-        model =new CategoriesModel();
-        model.setId(5);
-        model.setActive(true);
-        model.setName_ar("العرض رقم 3");
-        model.setName_en("offer num 3");
-        model.setImage("https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg");
-        adapter.addItem(model);
-
     };
     private ServicesAdapter servicesAdapter;
     Observer<List<ServicesModel>> servicesListUpdateObserver = servicesList -> {
@@ -148,43 +115,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         servicesAdapter.renewItems(servicesList);
 
         binding.emptyServices.setVisibility(View.GONE);
-        ServicesModel model2 =new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم 3");
-        model2.setInitial_price(1400);
-        model2.setTitle_en("offer num 3");
-        model2.setImage("https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg");
-        if(model2==null){
-            Log.e("model2","null");
-        }
-        if(servicesAdapter==null){
-            Log.e("servicesAdapter","null");
-        }
-        servicesAdapter.addItem(model2);
-        model2 =new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم 4");
-        model2.setTitle_en("offer num 3");
-        model2.setInitial_price(10);
-        model2.setImage("https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg");
-        servicesAdapter.addItem(model2);
-        model2 =new ServicesModel();
-        model2.setId(5);
-        model2.setActive(true);
-        model2.setTitle_ar("الخدمة رقم ٥");
-        model2.setTitle_en("offer num 3");
-        model2.setInitial_price(30);
-        model2.setImage("https://en.es-static.us/upl/2018/12/comet-wirtanen-Jack-Fusco-dec-2018-Anza-Borrego-desert-CA-e1544613895713.jpg");
-        servicesAdapter.addItem(model2);
     };
 
     @Override
     public void showCart() {
 
         binding.cart.setVisibility(View.VISIBLE);
-        binding.cartPrice.setText(pf.getCost()+" ريال");
+        binding.cartPrice.setText(pf.getCost()+getString(R.string.riyyal));
         binding.count.setText(pf.getCartCounter()+"");
     }
 
@@ -223,5 +160,23 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
     public void openMapsActivity() {
         Intent intent = MapActivity.newIntent(getContext());
             startActivity(intent);
+    }
+
+    @Override
+    public void showStatusFragment() {
+        Intent intent = MapActivity.newIntent(getContext()).putExtra("showStatus",1);
+        startActivity(intent);
+        getActivity().finish();
+
+    }
+
+    @Override
+    public void openPayment(OrderModel orderModel) {
+
+        Intent intent = new Intent(getContext(), CounterActivity.class)
+                .putExtra("type","paymentFromStart")
+                .putExtra("order",orderModel);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FAFAFA"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/header"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:elevation="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="50dp">
+
+
+            <ImageView
+                android:id="@+id/recieverImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/userphoto" />
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/receiverName"
+            tools:text="Marwa"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:fontFamily="@font/cairo"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chats"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/footer"
+        android:background="@color/white"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/send_message"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sendbtn" />
+
+    <EditText
+        android:id="@+id/message_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/send_message"
+        android:hint="اكتبي رسالتك"
+        android:fontFamily="@font/cairo"
+        android:padding="8dp"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@drawable/rounded_solid_grey"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine|textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/send_message"
+        app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_map_kwafira"
+            android:title="    الرئيسية"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="    المواعيد المجدولة"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_orders"
+            android:title="    الطلبات"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/nav_tools"
+            android:title="    الشكاوي والمقترحات"
+            android:checkable="true" />
+
+            <item
+                android:id="@+id/nav_logout"
+                android:title="     تواصلي معنا"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/nav_send"
+                android:title="     عن كوفيرة"
+                android:checkable="true"/>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="      الاعدادات"
+                android:checkable="true"/>
+    </group>
+</menu>

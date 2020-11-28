@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.almusand.kawfira.Bases.BaseViewHolder;
+import com.almusand.kawfira.R;
 import com.almusand.kawfira.databinding.ReviewItemBinding;
 import com.squareup.picasso.Picasso;
 
@@ -67,7 +68,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 Log.e("itemBinding null","NULL");
             itemBinding.setViewModel(viewModel);
             itemBinding.executePendingBindings();
-            Picasso.get().load(reviewModel.getImg_url()).into(itemBinding.userPic);
+            Picasso.get().load(reviewModel.getImg_url()).placeholder(R.drawable.userphoto).into(itemBinding.userPic);
+            itemBinding.listitemrating.setRating(Float.parseFloat(reviewModel.getStars()));
 
 
         }

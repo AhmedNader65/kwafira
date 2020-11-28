@@ -38,7 +38,7 @@
             android:textSize="25sp"/>
 
         <EditText
-
+            android:id="@+id/textArea"
             android:background="@drawable/rounded_solid_grey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:layout_margin="15dp"
             android:gravity="top|right"
             android:minLines="5"
-
+            android:fontFamily="@font/cairo"
             android:hint="ملاحظاتك ومقترحاتك"
             />
         <LinearLayout
@@ -66,6 +66,8 @@
                     android:layout_margin="16dp"
                     android:layout_width="wrap_content"
                     android:src="@drawable/icon_add_circle"
+                    android:maxWidth="200dp"
+                    android:maxHeight="200dp"
                     android:layout_height="wrap_content"
                     />
                 <TextView
@@ -90,6 +92,8 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/addDocument2"
+                    android:maxWidth="200dp"
+                    android:maxHeight="200dp"
                     android:layout_margin="16dp"
                     android:layout_width="wrap_content"
                     android:src="@drawable/icon_add_circle"
@@ -119,6 +123,8 @@
                     android:id="@+id/addDocument3"
                     android:layout_margin="16dp"
                     android:layout_width="wrap_content"
+                    android:maxWidth="200dp"
+                    android:maxHeight="200dp"
                     android:src="@drawable/icon_add_circle"
                     android:layout_height="wrap_content"
                     />

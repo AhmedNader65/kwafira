@@ -5,5 +5,7 @@ public interface MapsNavigator {
 
     void showToast(String validateText);
 
-    void showType();
+    void showType(String address, String homeNum, String apartNum);
+
+    void showType(String address, String homeNum, String apartNum, String lat, String lng);
 }
